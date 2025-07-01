@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binary Array Generator</title>
+    <title>Positional Array Generator</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -11,7 +11,7 @@
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Align to top */
+            align-items: flex-start;
             min-height: 100vh;
             margin: 0;
             padding: 2rem; 
@@ -64,8 +64,6 @@
         .suggestion-item:hover, .suggestion-item.suggestion-active {
             background-color: #e8f0fe;
         }
-
-        /* Bulk Add Section */
         #bulk-add-container {
             margin-top: 1.5rem;
         }
@@ -98,9 +96,8 @@
             border: 1px solid #ffeeba;
             border-radius: 5px;
             color: #856404;
-            display: none; /* Hidden by default */
+            display: none;
         }
-        
         #selected-countries-header {
             display: flex;
             justify-content: space-between;
@@ -202,7 +199,7 @@
 <body>
 
     <div class="container">
-        <h1>Country Selection to Binary Array</h1>
+        <h1>Positional Array Generator</h1>
         
         <h2>Option 1: Select Manually</h2>
         <div class="input-container">
@@ -225,11 +222,11 @@
         
         <div class="actions-container">
             <button id="clear-btn">Clear All</button>
-            <button id="proceed-btn">Proceed</button>
+            <button id="proceed-btn">Generate Array</button>
         </div>
 
         <div id="result">
-            <p>Your binary array will appear here.</p>
+            <p>Your positional array will appear here.</p>
         </div>
     </div>
 
@@ -374,7 +371,7 @@
         function selectCountry(index) {
             if (filteredCountries[index]) {
                 addCountry(filteredCountries[index]);
-                renderSelectedCountries(); // *** THIS IS THE FIX: Render immediately after selection ***
+                renderSelectedCountries();
                 countryInput.value = '';
                 countryInput.focus();
                 handleInput();
@@ -439,7 +436,7 @@
                     unmapped.push(trimmedName);
                 }
             });
-            renderSelectedCountries(); // Render after processing all names
+            renderSelectedCountries();
             if (unmapped.length > 0) {
                 unmappedWarning.style.display = 'block';
                 unmappedWarning.innerHTML = `<strong>Could not map the following entries:</strong><br>${unmapped.join(', ')}`;
@@ -449,16 +446,17 @@
         }
 
         function generateArray() {
-            const binaryArray = countries.map(country =>
-                selectedCountries.some(c => c.id === country.id) ? 1 : 0
-            );
-            resultPanel.innerHTML = `<p><strong>Generated Array:</strong></p>[${binaryArray.join(', ')}]`;
+            // Sort by ID to ensure consistent order
+            selectedCountries.sort((a, b) => a.id - b.id);
+            // Map to get just the IDs of the selected countries
+            const positionalArray = selectedCountries.map(country => country.id);
+            resultPanel.innerHTML = `<p><strong>Generated Positional Array:</strong></p>[${positionalArray.join(', ')}]`;
         }
         
         function clearAll() {
             selectedCountries = [];
             renderSelectedCountries();
-            resultPanel.innerHTML = '<p>Your binary array will appear here.</p>';
+            resultPanel.innerHTML = '<p>Your positional array will appear here.</p>';
             countryInput.value = '';
             countryListInput.value = '';
             unmappedWarning.style.display = 'none';

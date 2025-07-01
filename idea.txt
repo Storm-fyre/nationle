@@ -1,0 +1,32 @@
+I have a game idea. Guess the country. Game got a secret country, player should guess it by using yes or no questions. So in games backend there will be a very huge repository of questions. For each question-country mapping, there shall be a yes or no. There will be all 195 countries. The ui will be like a player types the question and the questions will be shown that matches what he typed that we have in our question bank. Do you get it. I'm thinking the repository is going to be huge.
+There is going to be a nations.json which have all countries:
+nations.json:
+[
+  { "id": 1, "name": "Russia" },
+  { "id": 2, "name": "Canada" },
+  { "id": 3, "name": "China" },
+  { "id": 4, "name": "United States" },
+  { "id": 5, "name": "Brazil" },
+  { "id": 6, "name": "Australia" },
+  { "id": 7, "name": "India" }
+  ...
+  ...
+]
+total of 195 nations.
+then the main one:
+{
+  "questions": [
+    {
+      "text": "Does your nation have nuclear weapons",
+      "answers": [1,0,1,1,0,0,1,.....195 entries in total]
+    },
+    {
+      "text": "Is your country landlocked?",
+      "answers": [0,0,0,0,0,.......]
+    },
+    .........
+  ]
+}
+if its a yes then the answers array in that particular position will be 1 if not 0.
+
+do you like it?
