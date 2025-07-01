@@ -14,6 +14,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 1rem; /* Added padding for smaller screens */
         }
         .container {
             background-color: #ffffff;
@@ -55,18 +56,34 @@
             padding: 0.75rem;
             cursor: pointer;
         }
-        /* Style for the hovered or keyboard-selected item */
         .suggestion-item:hover, .suggestion-item.suggestion-active {
             background-color: #e8f0fe;
         }
-        #selected-countries {
+        #selected-countries-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-top: 1.5rem;
+        }
+        #view-toggle-btn {
+            background: none;
+            border: 1px solid #1a73e8;
+            color: #1a73e8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        #selected-countries {
+            margin-top: 0.5rem;
+            min-height: 40px; /* Reserve space */
+        }
+        .pills-view {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            min-height: 30px; /* Reserve space */
         }
-        .selected-country {
+        .selected-country-pill {
             background-color: #e8f0fe;
             color: #1a73e8;
             padding: 0.5rem 0.75rem;
@@ -75,11 +92,35 @@
             align-items: center;
             font-size: 0.9rem;
         }
+        .list-view ol {
+            list-style: none; /* Hide default numbers */
+            padding-left: 0;
+            margin: 0;
+        }
+        .list-view li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25rem 0;
+        }
         .remove-btn {
-            margin-left: 0.5rem;
+            margin-left: 1rem;
             cursor: pointer;
             font-weight: bold;
-            color: #1a73e8;
+            color: #d9534f;
+            font-size: 1rem;
+        }
+        .selected-country-pill .remove-btn {
+             color: #1a73e8;
+             font-size: 0.9rem;
+        }
+        .actions-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 1rem;
         }
         #proceed-btn {
             background-color: #1a73e8;
@@ -89,13 +130,20 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
-            display: block;
-            width: 100%;
-            margin-top: 2rem;
             transition: background-color 0.3s;
+            flex-grow: 1;
         }
         #proceed-btn:hover {
             background-color: #1558b3;
+        }
+        #clear-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
         }
         #result {
             margin-top: 2rem;
@@ -116,11 +164,18 @@
             <input type="text" id="country-input" placeholder="Type a country name...">
             <div id="suggestions"></div>
         </div>
-        <div id="selected-countries-container">
+
+        <div id="selected-countries-header">
             <p>Selected Countries:</p>
-            <div id="selected-countries"></div>
+            <button id="view-toggle-btn">Toggle View</button>
         </div>
-        <button id="proceed-btn">Proceed</button>
+        <div id="selected-countries"></div>
+        
+        <div class="actions-container">
+            <button id="clear-btn">Clear All</button>
+            <button id="proceed-btn">Proceed</button>
+        </div>
+
         <div id="result">
             <p>Your binary array will appear here.</p>
         </div>
@@ -201,15 +256,18 @@
         const selectedCountriesPanel = document.getElementById('selected-countries');
         const proceedBtn = document.getElementById('proceed-btn');
         const resultPanel = document.getElementById('result');
+        const viewToggleBtn = document.getElementById('view-toggle-btn');
+        const clearBtn = document.getElementById('clear-btn');
 
         let selectedCountries = [];
         let filteredCountries = [];
         let highlightedIndex = -1;
+        let currentView = 'pills'; // 'pills' or 'list'
 
-        countryInput.addEventListener('input', () => {
+        function handleInput() {
             const input = countryInput.value.toLowerCase();
             suggestionsPanel.innerHTML = '';
-            highlightedIndex = -1; 
+            highlightedIndex = -1;
             if (input.length > 0) {
                 filteredCountries = countries.filter(country =>
                     country.name.toLowerCase().startsWith(input)
@@ -224,9 +282,9 @@
             } else {
                 filteredCountries = [];
             }
-        });
+        }
 
-        countryInput.addEventListener('keydown', (e) => {
+        function handleKeydown(e) {
             const items = suggestionsPanel.getElementsByClassName('suggestion-item');
             if (items.length === 0) return;
 
@@ -243,11 +301,10 @@
                 if (highlightedIndex > -1) {
                     selectCountry(highlightedIndex);
                 } else if (items.length > 0) {
-                    // If Enter is pressed without arrow navigation, select the top one
                     selectCountry(0);
                 }
             }
-        });
+        }
 
         function updateHighlight() {
             const items = suggestionsPanel.getElementsByClassName('suggestion-item');
@@ -264,9 +321,8 @@
             if (filteredCountries[index]) {
                 addCountry(filteredCountries[index]);
                 countryInput.value = '';
-                suggestionsPanel.innerHTML = '';
-                filteredCountries = [];
-                highlightedIndex = -1;
+                countryInput.focus();
+                handleInput();
             }
         }
 
@@ -284,33 +340,73 @@
 
         function renderSelectedCountries() {
             selectedCountriesPanel.innerHTML = '';
-            selectedCountries.forEach(country => {
-                const div = document.createElement('div');
-                div.classList.add('selected-country');
-                div.textContent = country.name;
-                const removeSpan = document.createElement('span');
-                removeSpan.textContent = 'x';
-                removeSpan.classList.add('remove-btn');
-                removeSpan.addEventListener('click', () => removeCountry(country.id));
-                div.appendChild(removeSpan);
-                selectedCountriesPanel.appendChild(div);
-            });
+            
+            if (currentView === 'pills') {
+                selectedCountriesPanel.className = 'pills-view';
+                selectedCountries.forEach(country => {
+                    const pill = document.createElement('div');
+                    pill.classList.add('selected-country-pill');
+                    pill.textContent = country.name;
+                    const removeSpan = document.createElement('span');
+                    removeSpan.textContent = 'x';
+                    removeSpan.classList.add('remove-btn');
+                    removeSpan.onclick = () => removeCountry(country.id);
+                    pill.appendChild(removeSpan);
+                    selectedCountriesPanel.appendChild(pill);
+                });
+            } else { // 'list' view
+                selectedCountriesPanel.className = 'list-view';
+                const list = document.createElement('ol');
+                selectedCountries.forEach((country, index) => {
+                    const listItem = document.createElement('li');
+                    const countryName = document.createElement('span');
+                    // Add serial number to the text content
+                    countryName.textContent = `${index + 1}. ${country.name}`;
+                    const removeSpan = document.createElement('span');
+                    removeSpan.textContent = 'x';
+                    removeSpan.classList.add('remove-btn');
+                    removeSpan.onclick = () => removeCountry(country.id);
+                    listItem.appendChild(countryName);
+                    listItem.appendChild(removeSpan);
+                    list.appendChild(listItem);
+                });
+                selectedCountriesPanel.appendChild(list);
+            }
+        }
+        
+        function generateArray() {
+            const binaryArray = countries.map(country =>
+                selectedCountries.some(c => c.id === country.id) ? 1 : 0
+            );
+            resultPanel.innerHTML = `<p><strong>Generated Array:</strong></p>[${binaryArray.join(', ')}]`;
+        }
+        
+        function clearAll() {
+            selectedCountries = [];
+            renderSelectedCountries();
+            resultPanel.innerHTML = '<p>Your binary array will appear here.</p>';
+            countryInput.value = '';
+            countryInput.focus();
         }
 
-        proceedBtn.addEventListener('click', () => {
-            const binaryArray = countries.map(country => {
-                return selectedCountries.find(c => c.id === country.id) ? 1 : 0;
-            });
-            resultPanel.innerHTML = `<p><strong>Generated Array:</strong></p>[${binaryArray.join(', ')}]`;
+        countryInput.addEventListener('input', handleInput);
+        countryInput.addEventListener('keydown', handleKeydown);
+        proceedBtn.addEventListener('click', generateArray);
+        clearBtn.addEventListener('click', clearAll);
+
+        viewToggleBtn.addEventListener('click', () => {
+            currentView = (currentView === 'pills') ? 'list' : 'pills';
+            renderSelectedCountries();
         });
-        
-        // Hide suggestions when clicking outside
+
         document.addEventListener('click', function (e) {
             if (!countryInput.contains(e.target) && !suggestionsPanel.contains(e.target)) {
                 suggestionsPanel.innerHTML = '';
-                filteredCountries = [];
             }
         });
+        
+        // Initial render
+        renderSelectedCountries();
 
     </script>
 
