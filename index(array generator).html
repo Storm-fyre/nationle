@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positional Array Generator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem; 
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #1a73e8;
+        }
+        h2 {
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        .input-container {
+            position: relative;
+        }
+        #country-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        #suggestions {
+            border: 1px solid #ccc;
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            position: absolute;
+            background-color: white;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 0 0 5px 5px;
+        }
+        .suggestion-item {
+            padding: 0.75rem;
+            cursor: pointer;
+        }
+        .suggestion-item:hover, .suggestion-item.suggestion-active {
+            background-color: #e8f0fe;
+        }
+        #bulk-add-container {
+            margin-top: 1.5rem;
+        }
+        #country-list-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        #process-list-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 0.5rem;
+            float: right;
+        }
+        #unmapped-warning {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            color: #856404;
+            display: none;
+        }
+        #selected-countries-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            clear: both;
+        }
+        #view-toggle-btn {
+            background: none;
+            border: 1px solid #1a73e8;
+            color: #1a73e8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        #selected-countries {
+            margin-top: 0.5rem;
+            min-height: 40px; 
+        }
+        .pills-view {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .selected-country-pill {
+            background-color: #e8f0fe;
+            color: #1a73e8;
+            padding: 0.5rem 0.75rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        .list-view ol {
+            list-style: none; 
+            padding-left: 0;
+            margin: 0;
+        }
+        .list-view li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25rem 0;
+        }
+        .remove-btn {
+            margin-left: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            color: #d9534f;
+            font-size: 1rem;
+        }
+        .selected-country-pill .remove-btn {
+             color: #1a73e8;
+             font-size: 0.9rem;
+        }
+        .actions-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        #proceed-btn {
+            background-color: #1a73e8;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            flex-grow: 1;
+        }
+        #proceed-btn:hover {
+            background-color: #1558b3;
+        }
+        #clear-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        #result {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+            word-wrap: break-word;
+            line-height: 1.6;
+            font-family: "Courier New", Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Positional Array Generator</h1>
+        
+        <h2>Option 1: Select Manually</h2>
+        <div class="input-container">
+            <input type="text" id="country-input" placeholder="Type a country name...">
+            <div id="suggestions"></div>
+        </div>
+
+        <h2>Option 2: Paste a List</h2>
+        <div id="bulk-add-container">
+            <textarea id="country-list-input" placeholder="Paste a list of countries here, separated by commas or new lines..."></textarea>
+            <button id="process-list-btn">Process List</button>
+            <div id="unmapped-warning"></div>
+        </div>
+
+        <div id="selected-countries-header">
+            <h3>Selected Countries</h3>
+            <button id="view-toggle-btn">Toggle View</button>
+        </div>
+        <div id="selected-countries"></div>
+        
+        <div class="actions-container">
+            <button id="clear-btn">Clear All</button>
+            <button id="proceed-btn">Generate Array</button>
+        </div>
+
+        <div id="result">
+            <p>Your positional array will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        const countries = [
+            { "id": 1, "name": "Russia" }, { "id": 2, "name": "Canada" }, { "id": 3, "name": "China" },
+            { "id": 4, "name": "United States" }, { "id": 5, "name": "Brazil" }, { "id": 6, "name": "Australia" },
+            { "id": 7, "name": "India" }, { "id": 8, "name": "Argentina" }, { "id": 9, "name": "Kazakhstan" },
+            { "id": 10, "name": "Algeria" }, { "id": 11, "name": "Democratic Republic of the Congo" },
+            { "id": 12, "name": "Saudi Arabia" }, { "id": 13, "name": "Mexico" }, { "id": 14, "name": "Indonesia" },
+            { "id": 15, "name": "Sudan" }, { "id": 16, "name": "Libya" }, { "id": 17, "name": "Iran" },
+            { "id": 18, "name": "Mongolia" }, { "id": 19, "name": "Peru" }, { "id": 20, "name": "Chad" },
+            { "id": 21, "name": "Niger" }, { "id": 22, "name": "Angola" }, { "id": 23, "name": "Mali" },
+            { "id": 24, "name": "South Africa" }, { "id": 25, "name": "Colombia" }, { "id": 26, "name": "Ethiopia" },
+            { "id": 27, "name": "Bolivia" }, { "id": 28, "name": "Mauritania" }, { "id": 29, "name": "Egypt" },
+            { "id": 30, "name": "Tanzania" }, { "id": 31, "name": "Nigeria" }, { "id": 32, "name": "Venezuela" },
+            { "id": 33, "name": "Pakistan" }, { "id": 34, "name": "Namibia" }, { "id": 35, "name": "Mozambique" },
+            { "id": 36, "name": "Turkey" }, { "id": 37, "name": "Chile" }, { "id": 38, "name": "Zambia" },
+            { "id": 39, "name": "Myanmar" }, { "id": 40, "name": "Afghanistan" }, { "id": 41, "name": "South Sudan" },
+            { "id": 42, "name": "France" }, { "id": 43, "name": "Somalia" }, { "id": 44, "name": "Central African Republic" },
+            { "id": 45, "name": "Ukraine" }, { "id": 46, "name": "Madagascar" }, { "id": 47, "name": "Botswana" },
+            { "id": 48, "name": "Kenya" }, { "id": 49, "name": "Yemen" }, { "id": 50, "name": "Thailand" },
+            { "id": 51, "name": "Spain" }, { "id": 52, "name": "Turkmenistan" }, { "id": 53, "name": "Cameroon" },
+            { "id": 54, "name": "Papua New Guinea" }, { "id": 55, "name": "Sweden" }, { "id": 56, "name": "Uzbekistan" },
+            { "id": 57, "name": "Morocco" }, { "id": 58, "name": "Iraq" }, { "id": 59, "name": "Paraguay" },
+            { "id": 60, "name": "Zimbabwe" }, { "id": 61, "name": "Japan" }, { "id": 62, "name": "Germany" },
+            { "id": 63, "name": "Republic of the Congo" }, { "id": 64, "name": "Finland" }, { "id": 65, "name": "Vietnam" },
+            { "id": 66, "name": "Malaysia" }, { "id": 67, "name": "Norway" }, { "id": 68, "name": "Côte d'Ivoire" },
+            { "id": 69, "name": "Poland" }, { "id": 70, "name": "Oman" }, { "id": 71, "name": "Italy" },
+            { "id": 72, "name": "Philippines" }, { "id": 73, "name": "Ecuador" }, { "id": 74, "name": "Burkina Faso" },
+            { "id": 75, "name": "New Zealand" }, { "id": 76, "name": "Gabon" }, { "id": 77, "name": "Guinea" },
+            { "id": 78, "name": "United Kingdom" }, { "id": 79, "name": "Uganda" }, { "id": 80, "name": "Ghana" },
+            { "id": 81, "name": "Romania" }, { "id": 82, "name": "Laos" }, { "id": 83, "name": "Guyana" },
+            { "id": 84, "name": "Belarus" }, { "id": 85, "name": "Kyrgyzstan" }, { "id": 86, "name": "Senegal" },
+            { "id": 87, "name": "Syria" }, { "id": 88, "name": "Cambodia" }, { "id": 89, "name": "Uruguay" },
+            { "id": 90, "name": "Suriname" }, { "id": 91, "name": "Tunisia" }, { "id": 92, "name": "Nepal" },
+            { "id": 93, "name": "Bangladesh" }, { "id": 94, "name": "Tajikistan" }, { "id": 95, "name": "Greece" },
+            { "id": 96, "name": "Nicaragua" }, { "id": 97, "name": "North Korea" }, { "id": 98, "name": "Eritrea" },
+            { "id": 99, "name": "Malawi" }, { "id": 100, "name": "Benin" }, { "id": 101, "name": "Honduras" },
+            { "id": 102, "name": "Liberia" }, { "id": 103, "name": "Bulgaria" }, { "id": 104, "name": "Cuba" },
+            { "id": 105, "name": "Guatemala" }, { "id": 106, "name": "Iceland" }, { "id": 107, "name": "South Korea" },
+            { "id": 108, "name": "Hungary" }, { "id": 109, "name": "Portugal" }, { "id": 110, "name": "Jordan" },
+            { "id": 111, "name": "Serbia" }, { "id": 112, "name": "Azerbaijan" }, { "id": 113, "name": "Austria" },
+            { "id": 114, "name": "United Arab Emirates" }, { "id": 115, "name": "Czech Republic" }, { "id": 116, "name": "Panama" },
+            { "id": 117, "name": "Sierra Leone" }, { "id": 118, "name": "Ireland" }, { "id": 119, "name": "Georgia" },
+            { "id": 120, "name": "Sri Lanka" }, { "id": 121, "name": "Lithuania" }, { "id": 122, "name": "Latvia" },
+            { "id": 123, "name": "Togo" }, { "id": 124, "name": "Croatia" }, { "id": 125, "name": "Bosnia and Herzegovina" },
+            { "id": 126, "name": "Costa Rica" }, { "id": 127, "name": "Slovakia" }, { "id": 128, "name": "Dominican Republic" },
+            { "id": 129, "name": "Estonia" }, { "id": 130, "name": "Denmark" }, { "id": 131, "name": "Netherlands" },
+            { "id": 132, "name": "Switzerland" }, { "id": 133, "name": "Bhutan" }, { "id": 134, "name": "Guinea-Bissau" },
+            { "id": 135, "name": "Moldova" }, { "id": 136, "name": "Belgium" }, { "id": 137, "name": "Lesotho" },
+            { "id": 138, "name": "Armenia" }, { "id": 139, "name": "Solomon Islands" }, { "id": 140, "name": "Albania" },
+            { "id": 141, "name": "Equatorial Guinea" }, { "id": 142, "name": "Burundi" }, { "id": 143, "name": "Haiti" },
+            { "id": 144, "name": "Rwanda" }, { "id": 145, "name": "North Macedonia" }, { "id": 146, "name": "Djibouti" },
+            { "id": 147, "name": "Belize" }, { "id": 148, "name": "El Salvador" }, { "id": 149, "name": "Israel" },
+            { "id": 150, "name": "Slovenia" }, { "id": 151, "name": "Fiji" }, { "id": 152, "name": "Kuwait" },
+            { "id": 153, "name": "Eswatini" }, { "id": 154, "name": "Timor-Leste" }, { "id": 155, "name": "Bahamas" },
+            { "id": 156, "name": "Montenegro" }, { "id": 157, "name": "Vanuatu" }, { "id": 158, "name": "Qatar" },
+            { "id": 159, "name": "Gambia" }, { "id": 160, "name": "Jamaica" }, { "id": 161, "name": "Lebanon" },
+            { "id": 162, "name": "Cyprus" }, { "id": 163, "name": "State of Palestine" }, { "id": 164, "name": "Brunei Darussalam" },
+            { "id": 165, "name": "Trinidad and Tobago" }, { "id": 166, "name": "Cabo Verde" }, { "id": 167, "name": "Samoa" },
+            { "id": 168, "name": "Luxembourg" }, { "id": 169, "name": "Comoros" }, { "id": 170, "name": "Mauritius" },
+            { "id": 171, "name": "Sao Tome and Principe" }, { "id": 172, "name": "Kiribati" }, { "id": 173, "name": "Dominica" },
+            { "id": 174, "name": "Tonga" }, { "id": 175, "name": "Micronesia (Federated States of)" }, { "id": 176, "name": "Singapore" },
+            { "id": 177, "name": "Bahrain" }, { "id": 178, "name": "Saint Lucia" }, { "id": 179, "name": "Seychelles" },
+            { "id": 180, "name": "Andorra" }, { "id": 181, "name": "Palau" }, { "id": 182, "name": "Antigua and Barbuda" },
+            { "id": 183, "name": "Barbados" }, { "id": 184, "name": "Saint Vincent and the Grenadines" },
+            { "id": 185, "name": "Grenada" }, { "id": 186, "name": "Malta" }, { "id": 187, "name": "Maldives" },
+            { "id": 188, "name": "Saint Kitts and Nevis" }, { "id": 189, "name": "Marshall Islands" }, { "id": 190, "name": "Liechtenstein" },
+            { "id": 191, "name": "San Marino" }, { "id": 192, "name": "Tuvalu" }, { "id": 193, "name": "Nauru" },
+            { "id": 194, "name": "Monaco" }, { "id": 195, "name": "Vatican City" }
+        ];
+
+        // --- DOM Elements ---
+        const countryInput = document.getElementById('country-input');
+        const suggestionsPanel = document.getElementById('suggestions');
+        const countryListInput = document.getElementById('country-list-input');
+        const processListBtn = document.getElementById('process-list-btn');
+        const unmappedWarning = document.getElementById('unmapped-warning');
+        const selectedCountriesPanel = document.getElementById('selected-countries');
+        const proceedBtn = document.getElementById('proceed-btn');
+        const resultPanel = document.getElementById('result');
+        const viewToggleBtn = document.getElementById('view-toggle-btn');
+        const clearBtn = document.getElementById('clear-btn');
+
+        // --- State ---
+        let selectedCountries = [];
+        let filteredCountries = [];
+        let highlightedIndex = -1;
+        let currentView = 'pills';
+
+        // --- Functions ---
+        
+        function handleInput() {
+            const input = countryInput.value.toLowerCase();
+            suggestionsPanel.innerHTML = '';
+            highlightedIndex = -1;
+            if (input.length > 0) {
+                filteredCountries = countries.filter(c => c.name.toLowerCase().startsWith(input));
+                filteredCountries.forEach((country, index) => {
+                    const div = document.createElement('div');
+                    div.textContent = country.name;
+                    div.className = 'suggestion-item';
+                    div.onclick = () => selectCountry(index);
+                    suggestionsPanel.appendChild(div);
+                });
+            } else {
+                filteredCountries = [];
+            }
+        }
+
+        function handleKeydown(e) {
+            const items = suggestionsPanel.getElementsByClassName('suggestion-item');
+            if (items.length === 0) return;
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                highlightedIndex = (highlightedIndex + 1) % items.length;
+                updateHighlight();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                highlightedIndex = (highlightedIndex - 1 + items.length) % items.length;
+                updateHighlight();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (highlightedIndex > -1) {
+                    selectCountry(highlightedIndex);
+                } else if (items.length > 0) {
+                    selectCountry(0);
+                }
+            }
+        }
+
+        function updateHighlight() {
+            Array.from(suggestionsPanel.children).forEach(child => child.classList.remove('suggestion-active'));
+            if (highlightedIndex > -1) {
+                const activeItem = suggestionsPanel.children[highlightedIndex];
+                activeItem.classList.add('suggestion-active');
+                activeItem.scrollIntoView({ block: 'nearest' });
+            }
+        }
+        
+        function selectCountry(index) {
+            if (filteredCountries[index]) {
+                addCountry(filteredCountries[index]);
+                renderSelectedCountries();
+                countryInput.value = '';
+                countryInput.focus();
+                handleInput();
+            }
+        }
+
+        function addCountry(country) {
+            if (!selectedCountries.some(c => c.id === country.id)) {
+                selectedCountries.push(country);
+            }
+        }
+
+        function removeCountry(countryId) {
+            selectedCountries = selectedCountries.filter(c => c.id !== countryId);
+            renderSelectedCountries();
+        }
+
+        function renderSelectedCountries() {
+            selectedCountriesPanel.innerHTML = '';
+            if (currentView === 'pills') {
+                selectedCountriesPanel.className = 'pills-view';
+                selectedCountries.forEach(country => {
+                    const pill = document.createElement('div');
+                    pill.className = 'selected-country-pill';
+                    pill.textContent = country.name;
+                    const removeSpan = document.createElement('span');
+                    removeSpan.textContent = 'x';
+                    removeSpan.className = 'remove-btn';
+                    removeSpan.onclick = () => removeCountry(country.id);
+                    pill.appendChild(removeSpan);
+                    selectedCountriesPanel.appendChild(pill);
+                });
+            } else {
+                selectedCountriesPanel.className = 'list-view';
+                const list = document.createElement('ol');
+                selectedCountries.forEach((country, index) => {
+                    const listItem = document.createElement('li');
+                    const countryName = document.createElement('span');
+                    countryName.textContent = `${index + 1}. ${country.name}`;
+                    const removeSpan = document.createElement('span');
+                    removeSpan.textContent = 'x';
+                    removeSpan.className = 'remove-btn';
+                    removeSpan.onclick = () => removeCountry(country.id);
+                    listItem.appendChild(countryName);
+                    listItem.appendChild(removeSpan);
+                    list.appendChild(listItem);
+                });
+                selectedCountriesPanel.appendChild(list);
+            }
+        }
+        
+        function processPastedList() {
+            const inputText = countryListInput.value;
+            const pastedNames = inputText.split(/[\n,]+/).filter(name => name.trim() !== '');
+            const unmapped = [];
+            pastedNames.forEach(name => {
+                const trimmedName = name.trim();
+                const foundCountry = countries.find(c => c.name.toLowerCase() === trimmedName.toLowerCase());
+                if (foundCountry) {
+                    addCountry(foundCountry);
+                } else {
+                    unmapped.push(trimmedName);
+                }
+            });
+            renderSelectedCountries();
+            if (unmapped.length > 0) {
+                unmappedWarning.style.display = 'block';
+                unmappedWarning.innerHTML = `<strong>Could not map the following entries:</strong><br>${unmapped.join(', ')}`;
+            } else {
+                unmappedWarning.style.display = 'none';
+            }
+        }
+
+        function generateArray() {
+            // Sort by ID to ensure consistent order
+            selectedCountries.sort((a, b) => a.id - b.id);
+            // Map to get just the IDs of the selected countries
+            const positionalArray = selectedCountries.map(country => country.id);
+            resultPanel.innerHTML = `<p><strong>Generated Positional Array:</strong></p>[${positionalArray.join(', ')}]`;
+        }
+        
+        function clearAll() {
+            selectedCountries = [];
+            renderSelectedCountries();
+            resultPanel.innerHTML = '<p>Your positional array will appear here.</p>';
+            countryInput.value = '';
+            countryListInput.value = '';
+            unmappedWarning.style.display = 'none';
+            countryInput.focus();
+        }
+
+        // --- Event Listeners ---
+        countryInput.addEventListener('input', handleInput);
+        countryInput.addEventListener('keydown', handleKeydown);
+        processListBtn.addEventListener('click', processPastedList);
+        proceedBtn.addEventListener('click', generateArray);
+        clearBtn.addEventListener('click', clearAll);
+
+        viewToggleBtn.addEventListener('click', () => {
+            currentView = (currentView === 'pills') ? 'list' : 'pills';
+            renderSelectedCountries();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!countryInput.contains(e.target) && !suggestionsPanel.contains(e.target)) {
+                suggestionsPanel.innerHTML = '';
+            }
+        });
+        
+        // --- Initial Render ---
+        renderSelectedCountries();
+
+    </script>
+
+</body>
+</html>

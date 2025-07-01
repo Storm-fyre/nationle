@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nationle</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Nationle</h1>
+            <p>Guess a country, then ask a question to test your theory!</p>
+        </header>
+
+        <div class="interaction-area">
+            <div class="input-column">
+                <label for="country-guess-input">1. Guess a Country</label>
+                <div class="search-wrapper">
+                    <input type="text" id="country-guess-input" placeholder="Type a country name...">
+                    <div id="country-dropdown" class="dropdown-content"></div>
+                </div>
+            </div>
+
+            <div class="input-column">
+                <label for="question-input">2. Ask a Question</label>
+                <div class="search-wrapper">
+                    <input type="text" id="question-input" placeholder="Type or select a question...">
+                    <div id="question-dropdown" class="dropdown-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="filter-container">
+             <!-- Filter buttons will be dynamically inserted here -->
+        </div>
+
+        <div class="submit-container">
+            <button id="submit-turn-btn">Submit Guess</button>
+        </div>
+
+        <div class="feedback-container">
+            <h2>History</h2>
+            <div id="turn-log">
+                <!-- Log of turns will appear here -->
+            </div>
+        </div>
+
+        <div id="win-message" class="hidden">
+            <h2>You Guessed It! Congratulations!</h2>
+            <p>The secret country was <strong id="secret-country-name"></strong>!</p>
+            <button id="play-again-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

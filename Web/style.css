@@ -1,0 +1,233 @@
+:root {
+    --primary-bg: #f0f2f5;
+    --secondary-bg: #ffffff;
+    --primary-text: #333333;
+    --accent-color: #007bff;
+    --accent-hover: #0056b3;
+    --yes-color: #28a745;
+    --no-color: #dc3545;
+    --border-color: #e0e0e0;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 2rem;
+    margin: 0;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 800px;
+    background: var(--secondary-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.interaction-area {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.input-column {
+    flex: 1;
+}
+
+.input-column label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: var(--primary-text);
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--secondary-bg);
+    width: 100%;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    margin-top: 0.5rem;
+}
+
+.dropdown-item {
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background-color: var(--primary-bg);
+}
+
+.dropdown-item.category-title {
+    font-weight: 600;
+    color: var(--accent-color);
+    background-color: #f8f9fa;
+    cursor: default;
+}
+
+#filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    background-color: var(--primary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #dcdfe3;
+}
+
+.filter-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.submit-container {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+#submit-turn-btn {
+    padding: 0.8rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: var(--yes-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#submit-turn-btn:hover {
+    background-color: #218838;
+}
+
+#submit-turn-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.feedback-container {
+    margin-top: 1rem;
+}
+
+.turn-log-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr 70px;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    background: var(--primary-bg);
+}
+
+.log-part {
+    font-size: 0.9rem;
+}
+
+.log-part strong {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.log-answer {
+    font-weight: 600;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+}
+
+.log-answer.yes { background-color: var(--yes-color); }
+.log-answer.no { background-color: var(--no-color); }
+
+.hidden { display: none !important; }
+
+#win-message {
+    text-align: center;
+    padding: 2rem;
+    background-color: #e6f7ff;
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+#play-again-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+}
+
+#play-again-btn:hover {
+    background-color: var(--accent-hover);
+}
