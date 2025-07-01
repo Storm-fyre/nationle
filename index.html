@@ -11,10 +11,10 @@
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Align to top */
             min-height: 100vh;
             margin: 0;
-            padding: 1rem; /* Added padding for smaller screens */
+            padding: 2rem; 
         }
         .container {
             background-color: #ffffff;
@@ -25,10 +25,15 @@
             max-width: 800px;
             box-sizing: border-box;
         }
-        h1 {
-            color: #1a73e8;
+        h1, h2 {
             text-align: center;
-            margin-bottom: 2rem;
+            color: #1a73e8;
+        }
+        h2 {
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
         }
         .input-container {
             position: relative;
@@ -59,11 +64,49 @@
         .suggestion-item:hover, .suggestion-item.suggestion-active {
             background-color: #e8f0fe;
         }
+
+        /* Bulk Add Section */
+        #bulk-add-container {
+            margin-top: 1.5rem;
+        }
+        #country-list-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        #process-list-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 0.5rem;
+            float: right;
+        }
+        #unmapped-warning {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            color: #856404;
+            display: none; /* Hidden by default */
+        }
+        
         #selected-countries-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 1.5rem;
+            clear: both;
         }
         #view-toggle-btn {
             background: none;
@@ -76,7 +119,7 @@
         }
         #selected-countries {
             margin-top: 0.5rem;
-            min-height: 40px; /* Reserve space */
+            min-height: 40px; 
         }
         .pills-view {
             display: flex;
@@ -93,7 +136,7 @@
             font-size: 0.9rem;
         }
         .list-view ol {
-            list-style: none; /* Hide default numbers */
+            list-style: none; 
             padding-left: 0;
             margin: 0;
         }
@@ -160,13 +203,22 @@
 
     <div class="container">
         <h1>Country Selection to Binary Array</h1>
+        
+        <h2>Option 1: Select Manually</h2>
         <div class="input-container">
             <input type="text" id="country-input" placeholder="Type a country name...">
             <div id="suggestions"></div>
         </div>
 
+        <h2>Option 2: Paste a List</h2>
+        <div id="bulk-add-container">
+            <textarea id="country-list-input" placeholder="Paste a list of countries here, separated by commas or new lines..."></textarea>
+            <button id="process-list-btn">Process List</button>
+            <div id="unmapped-warning"></div>
+        </div>
+
         <div id="selected-countries-header">
-            <p>Selected Countries:</p>
+            <h3>Selected Countries</h3>
             <button id="view-toggle-btn">Toggle View</button>
         </div>
         <div id="selected-countries"></div>
@@ -251,32 +303,37 @@
             { "id": 194, "name": "Monaco" }, { "id": 195, "name": "Vatican City" }
         ];
 
+        // --- DOM Elements ---
         const countryInput = document.getElementById('country-input');
         const suggestionsPanel = document.getElementById('suggestions');
+        const countryListInput = document.getElementById('country-list-input');
+        const processListBtn = document.getElementById('process-list-btn');
+        const unmappedWarning = document.getElementById('unmapped-warning');
         const selectedCountriesPanel = document.getElementById('selected-countries');
         const proceedBtn = document.getElementById('proceed-btn');
         const resultPanel = document.getElementById('result');
         const viewToggleBtn = document.getElementById('view-toggle-btn');
         const clearBtn = document.getElementById('clear-btn');
 
+        // --- State ---
         let selectedCountries = [];
         let filteredCountries = [];
         let highlightedIndex = -1;
-        let currentView = 'pills'; // 'pills' or 'list'
+        let currentView = 'pills';
 
+        // --- Functions ---
+        
         function handleInput() {
             const input = countryInput.value.toLowerCase();
             suggestionsPanel.innerHTML = '';
             highlightedIndex = -1;
             if (input.length > 0) {
-                filteredCountries = countries.filter(country =>
-                    country.name.toLowerCase().startsWith(input)
-                );
+                filteredCountries = countries.filter(c => c.name.toLowerCase().startsWith(input));
                 filteredCountries.forEach((country, index) => {
                     const div = document.createElement('div');
                     div.textContent = country.name;
-                    div.classList.add('suggestion-item');
-                    div.addEventListener('click', () => selectCountry(index));
+                    div.className = 'suggestion-item';
+                    div.onclick = () => selectCountry(index);
                     suggestionsPanel.appendChild(div);
                 });
             } else {
@@ -287,7 +344,6 @@
         function handleKeydown(e) {
             const items = suggestionsPanel.getElementsByClassName('suggestion-item');
             if (items.length === 0) return;
-
             if (e.key === 'ArrowDown') {
                 e.preventDefault();
                 highlightedIndex = (highlightedIndex + 1) % items.length;
@@ -307,19 +363,18 @@
         }
 
         function updateHighlight() {
-            const items = suggestionsPanel.getElementsByClassName('suggestion-item');
-            for (let i = 0; i < items.length; i++) {
-                items[i].classList.remove('suggestion-active');
-            }
+            Array.from(suggestionsPanel.children).forEach(child => child.classList.remove('suggestion-active'));
             if (highlightedIndex > -1) {
-                items[highlightedIndex].classList.add('suggestion-active');
-                items[highlightedIndex].scrollIntoView({ block: 'nearest' });
+                const activeItem = suggestionsPanel.children[highlightedIndex];
+                activeItem.classList.add('suggestion-active');
+                activeItem.scrollIntoView({ block: 'nearest' });
             }
         }
         
         function selectCountry(index) {
             if (filteredCountries[index]) {
                 addCountry(filteredCountries[index]);
+                renderSelectedCountries(); // *** THIS IS THE FIX: Render immediately after selection ***
                 countryInput.value = '';
                 countryInput.focus();
                 handleInput();
@@ -327,9 +382,8 @@
         }
 
         function addCountry(country) {
-            if (!selectedCountries.find(c => c.id === country.id)) {
+            if (!selectedCountries.some(c => c.id === country.id)) {
                 selectedCountries.push(country);
-                renderSelectedCountries();
             }
         }
 
@@ -340,31 +394,29 @@
 
         function renderSelectedCountries() {
             selectedCountriesPanel.innerHTML = '';
-            
             if (currentView === 'pills') {
                 selectedCountriesPanel.className = 'pills-view';
                 selectedCountries.forEach(country => {
                     const pill = document.createElement('div');
-                    pill.classList.add('selected-country-pill');
+                    pill.className = 'selected-country-pill';
                     pill.textContent = country.name;
                     const removeSpan = document.createElement('span');
                     removeSpan.textContent = 'x';
-                    removeSpan.classList.add('remove-btn');
+                    removeSpan.className = 'remove-btn';
                     removeSpan.onclick = () => removeCountry(country.id);
                     pill.appendChild(removeSpan);
                     selectedCountriesPanel.appendChild(pill);
                 });
-            } else { // 'list' view
+            } else {
                 selectedCountriesPanel.className = 'list-view';
                 const list = document.createElement('ol');
                 selectedCountries.forEach((country, index) => {
                     const listItem = document.createElement('li');
                     const countryName = document.createElement('span');
-                    // Add serial number to the text content
                     countryName.textContent = `${index + 1}. ${country.name}`;
                     const removeSpan = document.createElement('span');
                     removeSpan.textContent = 'x';
-                    removeSpan.classList.add('remove-btn');
+                    removeSpan.className = 'remove-btn';
                     removeSpan.onclick = () => removeCountry(country.id);
                     listItem.appendChild(countryName);
                     listItem.appendChild(removeSpan);
@@ -374,6 +426,28 @@
             }
         }
         
+        function processPastedList() {
+            const inputText = countryListInput.value;
+            const pastedNames = inputText.split(/[\n,]+/).filter(name => name.trim() !== '');
+            const unmapped = [];
+            pastedNames.forEach(name => {
+                const trimmedName = name.trim();
+                const foundCountry = countries.find(c => c.name.toLowerCase() === trimmedName.toLowerCase());
+                if (foundCountry) {
+                    addCountry(foundCountry);
+                } else {
+                    unmapped.push(trimmedName);
+                }
+            });
+            renderSelectedCountries(); // Render after processing all names
+            if (unmapped.length > 0) {
+                unmappedWarning.style.display = 'block';
+                unmappedWarning.innerHTML = `<strong>Could not map the following entries:</strong><br>${unmapped.join(', ')}`;
+            } else {
+                unmappedWarning.style.display = 'none';
+            }
+        }
+
         function generateArray() {
             const binaryArray = countries.map(country =>
                 selectedCountries.some(c => c.id === country.id) ? 1 : 0
@@ -386,11 +460,15 @@
             renderSelectedCountries();
             resultPanel.innerHTML = '<p>Your binary array will appear here.</p>';
             countryInput.value = '';
+            countryListInput.value = '';
+            unmappedWarning.style.display = 'none';
             countryInput.focus();
         }
 
+        // --- Event Listeners ---
         countryInput.addEventListener('input', handleInput);
         countryInput.addEventListener('keydown', handleKeydown);
+        processListBtn.addEventListener('click', processPastedList);
         proceedBtn.addEventListener('click', generateArray);
         clearBtn.addEventListener('click', clearAll);
 
@@ -399,13 +477,13 @@
             renderSelectedCountries();
         });
 
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', (e) => {
             if (!countryInput.contains(e.target) && !suggestionsPanel.contains(e.target)) {
                 suggestionsPanel.innerHTML = '';
             }
         });
         
-        // Initial render
+        // --- Initial Render ---
         renderSelectedCountries();
 
     </script>
