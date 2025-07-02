@@ -1,0 +1,217 @@
+UK:
+Afghanistan
+Antigua and Barbuda
+Australia
+Bahamas
+Bahrain
+Bangladesh
+Barbados
+Belize
+Bhutan
+Botswana
+Brunei
+Canada
+Cyprus
+Dominica
+Egypt
+Eswatini
+Fiji
+Gambia
+Ghana
+Grenada
+Guyana
+India
+Iraq
+Israel
+Jamaica
+Jordan
+Kenya
+Kiribati
+Kuwait
+Lesotho
+Malawi
+Malaysia
+Maldives
+Malta
+Mauritius
+Myanmar
+New Zealand
+Nigeria
+Oman
+Pakistan
+Palestine
+Qatar
+Saint Kitts and Nevis
+Saint Lucia
+Saint Vincent and the Grenadines
+Seychelles
+Sierra Leone
+Singapore
+Solomon Islands
+South Africa
+South Sudan
+Sri Lanka
+Sudan
+Tanzania
+Tonga
+Trinidad and Tobago
+Tuvalu
+Uganda
+United Arab Emirates
+United States
+Yemen
+Zambia
+Zimbabwe
+
+
+France:
+Algeria
+Benin
+Burkina Faso
+Cambodia
+Cameroon
+Central African Republic
+Chad
+Comoros
+Republic of the Congo
+Côte d'Ivoire
+Djibouti
+Gabon
+Guinea
+Haiti
+Laos
+Lebanon
+Madagascar
+Mali
+Mauritania
+Morocco
+Niger
+Senegal
+Syria
+Togo
+Tunisia
+Vietnam
+
+Spain:
+Argentina
+Bolivia
+Chile
+Colombia
+Costa Rica
+Cuba
+Dominican Republic
+Ecuador
+El Salvador
+Equatorial Guinea
+Guatemala
+Honduras
+Mexico
+Nicaragua
+Panama
+Paraguay
+Peru
+Philippines
+Uruguay
+Venezuela
+
+Portugal:
+Angola
+Brazil
+Cabo Verde
+Guinea-Bissau
+Mozambique
+Sao Tome and Principe
+Timor-Leste
+
+Belgium:
+Burundi
+Democratic Republic of the Congo
+Rwanda
+
+Netherlands:
+Indonesia
+Suriname
+
+Italy:
+Eitrea
+Libya
+Somalia
+
+US:
+Liberia
+Marshall Islands
+Micronesia
+Palau
+
+Australia:
+Nauru
+Papua New Guinea
+
+New Zealand:
+Samoa
+
+South Africa:
+Namibia
+
+Never colonised:
+Albania
+Andorra
+Armenia
+Austria
+Azerbaijan
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+China
+Croatia
+Czechia
+Denmark
+Estonia
+Ethiopia
+Finland
+France
+Georgia
+Germany
+Greece
+Hungary
+Iceland
+Iran
+Italy
+Japan
+Kazakhstan
+Kyrgyzstan
+Latvia
+Liechtenstein
+Lithuania
+Luxembourg
+Moldova
+Monaco
+Mongolia
+Montenegro
+Nepal
+Netherlands
+North Korea
+North Macedonia
+Norway
+Poland
+Portugal
+Romania
+Russian Federation
+San Marino
+Saudi Arabia
+Serbia
+Slovakia
+Slovenia
+South Korea
+Spain
+Sweden
+Switzerland
+Tajikistan
+Thailand
+Turkey
+Turkmenistan
+Ukraine
+United Kingdom
+Uzbekistan
+Vatican City
