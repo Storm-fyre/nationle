@@ -1,7 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- EMBEDDED JSON DATA ---
-    const nations = [
+    // --- DOM ELEMENTS ---
+    const modeSelectionContainer = document.getElementById('mode-selection-container');
+    const gameContainer = document.querySelector('.game-container');
+    const modeButtonsContainer = document.getElementById('mode-buttons');
+    const mainTitle = document.getElementById('main-title');
+    const mainSubtitle = document.getElementById('main-subtitle');
+    
+    const countryGuessInput = document.getElementById('country-guess-input');
+    const questionInput = document.getElementById('question-input');
+    const typeQuestionBtn = document.getElementById('type-question-btn');
+    const countryDropdown = document.getElementById('country-dropdown');
+    const questionDropdown = document.getElementById('question-dropdown');
+    const filterContainer = document.getElementById('filter-container');
+    const submitTurnBtn = document.getElementById('submit-turn-btn');
+    const newGameBtn = document.getElementById('new-game-btn');
+    const turnLog = document.getElementById('turn-log');
+    
+    const winModal = document.getElementById('win-modal');
+    const secretCountryNameSpan = document.getElementById('secret-country-name');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+
+    // --- EMBEDDED NATIONS DATA ---
+    const allNations = [
         { "id": 1, "name": "Russia" }, { "id": 2, "name": "Canada" }, { "id": 3, "name": "China" },
         { "id": 4, "name": "United States" }, { "id": 5, "name": "Brazil" }, { "id": 6, "name": "Australia" },
         { "id": 7, "name": "India" }, { "id": 8, "name": "Argentina" }, { "id": 9, "name": "Kazakhstan" },
@@ -69,212 +90,292 @@ document.addEventListener('DOMContentLoaded', () => {
         { "id": 193, "name": "Monaco" }, { "id": 194, "name": "Vatican City" }, { "id": 195, "name": "Nauru" }
     ];
 
-    const questionsData = { "categories": [{ "name": "Multinational Groupings", "questions": [{ "question": "Is your country a member of the G7?", "countries": [2, 4, 42, 61, 62, 71, 78] }, { "question": "Is your country a member of the G20?", "countries": [1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 24, 36, 42, 61, 62, 71, 78, 107] }, { "question": "Is your country a member of BRICS?", "countries": [1, 3, 5, 7, 14, 17, 24, 26, 29, 114] }, { "question": "Is your country a member of the OECD?", "countries": [2, 4, 6, 13, 25, 36, 37, 42, 51, 55, 61, 62, 64, 67, 69, 71, 75, 78, 95, 106, 107, 108, 109, 113, 115, 118, 121, 122, 126, 127, 129, 130, 131, 132, 136, 149, 150, 168] }, { "question": "Is your country a member of OPEC?", "countries": [10, 12, 16, 17, 31, 32, 58, 63, 76, 114, 141, 152] }, { "question": "Is your country a member of OPEC+?", "countries": [1, 9, 10, 12, 13, 15, 16, 17, 31, 32, 41, 58, 63, 66, 70, 76, 112, 114, 141, 152, 164, 177] }, { "question": "Is your country a member of the EU (European Union)?", "countries": [42, 51, 55, 62, 64, 69, 71, 81, 95, 103, 108, 109, 113, 115, 118, 121, 122, 124, 127, 129, 130, 131, 136, 150, 162, 168, 186] }, { "question": "Is your country a member of ASEAN (Association of Southeast Asian Nations)?", "countries": [14, 39, 50, 65, 66, 72, 82, 88, 164, 176] }, { "question": "Is your country a member of NAFTA (North American Free Trade Agreement)?", "countries": [2, 4, 13] }, { "question": "Is your country a member of NATO (North Atlantic Treaty Organization)?", "countries": [2, 4, 36, 42, 51, 55, 62, 64, 67, 69, 71, 78, 81, 95, 103, 106, 108, 109, 115, 121, 122, 124, 127, 129, 130, 131, 136, 140, 145, 150, 156, 168] }, { "question": "Is your country a permanent member of UN security Council(Veto power)?", "countries": [1, 3, 4, 42, 78] }] }, { "name": "Geography", "questions": [{ "question": "Is your country land-locked?", "countries": [9, 18, 20, 21, 23, 26, 27, 38, 40, 41, 44, 47, 52, 56, 59, 60, 74, 79, 82, 84, 85, 92, 94, 99, 108, 111, 112, 113, 115, 127, 132, 133, 135, 137, 138, 142, 144, 145, 153, 168, 180, 190, 191, 195] }, { "question": "Is your country an Island?", "countries": [14, 46, 54, 61, 72, 75, 78, 104, 106, 118, 120, 128, 139, 143, 151, 154, 155, 157, 160, 162, 164, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 181, 182, 183, 184, 185, 186, 187, 188, 189, 192, 193] }, { "question": "Is your nation a city-state?", "countries": [176, 194, 195] }, { "question": "Does your country have Mediterranean sea coast?", "countries": [10, 16, 29, 36, 42, 51, 57, 71, 87, 91, 95, 124, 125, 140, 149, 150, 156, 161, 162, 163, 186, 194] }, { "question": "Is your country considered Baltic country?", "countries": [121, 122, 129] }, { "question": "Is your country considered Nordic country?", "countries": [55, 64, 67, 106, 130] }, { "question": "Is your country considered a Scandinavian country?", "countries": [55, 67, 130] }, { "question": "Does your country have Black sea coast?", "countries": [1, 36, 45, 81, 103, 119] }] }, { "name": "Political & Historical", "questions": [{ "question": "Is your country an absolute monarchy?", "countries": [12, 70, 114, 153, 158, 164] }, { "question": "Is your country a constitutional monarchy?", "countries": [2, 6, 50, 51, 55, 57, 61, 66, 67, 75, 78, 88, 110, 130, 131, 133, 136, 137, 152, 168, 174, 177, 180, 190, 194] }, { "question": "Is your country a parliamentary republic?", "countries": [7, 24, 26, 33, 62, 64, 69, 71, 92, 93, 95, 103, 106, 108, 111, 113, 115, 118, 119, 121, 122, 124, 125, 127, 129, 135, 140, 145, 149, 150, 151, 156, 157, 161, 165, 167, 170, 172, 173, 176, 183, 186, 191] }, { "question": "Is your country transitional/ semi presidential/ presidential republic?", "countries": [1, 4, 5, 8, 9, 10, 11, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 25, 27, 28, 29, 30, 31, 32, 34, 35, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46, 47, 48, 49, 52, 53, 56, 58, 59, 60, 63, 68, 72, 73, 74, 76, 77, 79, 80, 81, 83, 84, 85, 86, 87, 89, 90, 91, 94, 96, 99, 100, 101, 102, 105, 107, 109, 112, 116, 117, 123, 126, 128, 132, 134, 138, 139, 141, 142, 143, 144, 147, 148, 154, 155, 159, 160, 162, 166, 169, 171, 175, 178, 179, 181, 182, 184, 185, 187, 188, 189, 192, 193] }, { "question": "Is your country a single party state?", "countries": [3, 65, 82, 97, 98, 104] }, { "question": "Is your country a former Soviet republic?", "countries": [1, 9, 45, 52, 56, 84, 85, 94, 112, 119, 121, 122, 129, 135, 138] }, { "question": "Is your country a former Yugoslav republic?", "countries": [111, 124, 125, 145, 150, 156] }] }, { "name": "Technology", "questions": [{ "question": "Does your country have Nuclear Weapons?", "countries": [1, 3, 4, 7, 33, 42, 78, 97, 149] }] }] };
-
-    // --- DOM ELEMENTS ---
-    const countryGuessInput = document.getElementById('country-guess-input');
-    const questionInput = document.getElementById('question-input');
-    const countryDropdown = document.getElementById('country-dropdown');
-    const questionDropdown = document.getElementById('question-dropdown');
-    const filterContainer = document.getElementById('filter-container');
-    const submitTurnBtn = document.getElementById('submit-turn-btn');
-    const turnLog = document.getElementById('turn-log');
-    const winMessage = document.getElementById('win-message');
-    const secretCountryNameSpan = document.getElementById('secret-country-name');
-    const playAgainBtn = document.getElementById('play-again-btn');
-
-    // --- GAME STATE ---
-    let secretCountry = null;
-    let selectedCountryGuess = null;
-    let selectedQuestion = null;
-    let activeFilter = null;
-    
-    // --- CORE GAME LOGIC ---
-    function initializeGame() {
-        secretCountry = nations[Math.floor(Math.random() * nations.length)];
-        console.log(`Secret Country: ${secretCountry.name}`); // For debugging
-
-        resetTurnState();
-        activeFilter = null;
-        turnLog.innerHTML = '';
-
-        winMessage.classList.add('hidden');
-        [countryGuessInput, questionInput].forEach(input => input.disabled = false);
-        
-        renderFilterButtons();
-        updateSubmitButtonState();
-    }
-    
-    function resetTurnState() {
-        selectedCountryGuess = null;
-        selectedQuestion = null;
-        countryGuessInput.value = '';
-        questionInput.value = '';
-        updateSubmitButtonState();
+    // --- Initializer ---
+    function initialize() {
+        fetch('modes.json')
+            .then(response => response.json())
+            .then(modesData => {
+                showModeScreen(modesData);
+            })
+            .catch(error => {
+                console.error("Could not load modes.json:", error);
+                document.body.innerHTML = `<div style="text-align: center; padding: 50px; font-family: sans-serif;">
+                    <h1>Error</h1><p>Could not load game modes. Please check the console.</p></div>`;
+            });
     }
 
-    function submitTurn() {
-        if (!selectedCountryGuess || !selectedQuestion) return;
+    function showModeScreen(modesData) {
+        mainTitle.textContent = modesData.title;
+        mainSubtitle.textContent = modesData.subtitle;
+        modeButtonsContainer.innerHTML = ''; // Clear previous buttons
 
-        // 1. Check for a win
-        if (selectedCountryGuess.id === secretCountry.id) {
-            showWinScreen();
-            return;
-        }
-
-        // 2. Process the turn if not a win
-        const isYes = selectedQuestion.countries.includes(secretCountry.id);
-        logTurn(selectedCountryGuess, selectedQuestion, isYes);
-        
-        // 3. Reset for the next turn
-        resetTurnState();
-    }
-
-    function showWinScreen() {
-        secretCountryNameSpan.textContent = secretCountry.name;
-        winMessage.classList.remove('hidden');
-        [countryGuessInput, questionInput, submitTurnBtn].forEach(el => el.disabled = true);
-        filterContainer.style.pointerEvents = 'none';
-    }
-
-    // --- UI RENDERING & UPDATES ---
-    
-    function renderCountryGuesses() {
-        const query = countryGuessInput.value.toLowerCase();
-        const filteredNations = nations.filter(n => n.name.toLowerCase().includes(query));
-        
-        countryDropdown.innerHTML = '';
-        filteredNations.forEach(nation => {
-            const item = createDropdownItem(nation.name, () => selectCountryGuess(nation));
-            countryDropdown.appendChild(item);
-        });
-        countryDropdown.style.display = 'block';
-    }
-
-    function renderQuestions() {
-        const query = questionInput.value.toLowerCase();
-        let questionsToDisplay = [];
-        questionDropdown.innerHTML = '';
-
-        const categoriesToRender = activeFilter 
-            ? questionsData.categories.filter(c => c.name === activeFilter)
-            : questionsData.categories;
-
-        categoriesToRender.forEach(category => {
-            const filteredQuestions = category.questions.filter(q => q.question.toLowerCase().includes(query));
-            if (filteredQuestions.length > 0) {
-                 if (activeFilter) {
-                    const categoryTitle = createDropdownItem(category.name, null, 'category-title');
-                    questionDropdown.appendChild(categoryTitle);
-                }
-                filteredQuestions.forEach(q => questionsToDisplay.push(q));
-            }
-        });
-        
-        if (!activeFilter) {
-             questionsToDisplay.sort((a, b) => a.question.localeCompare(b.question));
-        }
-
-        questionsToDisplay.forEach(q => {
-            const item = createDropdownItem(q.question, () => selectQuestion(q));
-            questionDropdown.appendChild(item);
-        });
-        
-        questionDropdown.style.display = 'block';
-    }
-
-    function createDropdownItem(text, onClick, extraClass = '') {
-        const item = document.createElement('div');
-        item.className = `dropdown-item ${extraClass}`;
-        item.textContent = text;
-        if (onClick) {
-            item.addEventListener('click', onClick);
-        }
-        return item;
-    }
-    
-    function logTurn(country, question, isYes) {
-        const logItem = document.createElement('div');
-        logItem.className = 'turn-log-item';
-
-        const guessPart = document.createElement('div');
-        guessPart.className = 'log-part';
-        guessPart.innerHTML = `Guessed: <strong>${country.name}</strong>`;
-
-        const questionPart = document.createElement('div');
-        questionPart.className = 'log-part';
-        questionPart.textContent = `Asked: ${question.question}`;
-        
-        const answerPart = document.createElement('div');
-        answerPart.className = `log-answer ${isYes ? 'yes' : 'no'}`;
-        answerPart.textContent = isYes ? 'YES' : 'NO';
-        
-        logItem.append(guessPart, questionPart, answerPart);
-        turnLog.prepend(logItem);
-    }
-    
-    function renderFilterButtons() {
-        filterContainer.innerHTML = '';
-        filterContainer.style.pointerEvents = 'auto';
-        const allButton = document.createElement('button');
-        allButton.className = 'filter-btn active';
-        allButton.textContent = 'All Categories';
-        allButton.addEventListener('click', () => setFilter(null));
-        filterContainer.appendChild(allButton);
-
-        questionsData.categories.forEach(category => {
+        modesData.modes.forEach(mode => {
             const button = document.createElement('button');
-            button.className = 'filter-btn';
-            button.textContent = category.name;
-            button.addEventListener('click', () => setFilter(category.name));
-            filterContainer.appendChild(button);
+            button.className = 'mode-btn';
+            button.innerHTML = `${mode.name}<span class="mode-description">${mode.description}</span>`;
+            button.addEventListener('click', () => {
+                startGame(mode);
+            });
+            modeButtonsContainer.appendChild(button);
         });
+
+        // Show mode screen and hide game
+        modeSelectionContainer.classList.remove('hidden');
+        gameContainer.classList.add('hidden');
     }
 
-    function setFilter(categoryName) {
-        activeFilter = categoryName;
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            const isActive = (!categoryName && btn.textContent === 'All Categories') || (btn.textContent === categoryName);
-            btn.classList.toggle('active', isActive);
-        });
-        renderQuestions();
+    function startGame(mode) {
+        // Hide mode screen and show game
+        modeSelectionContainer.classList.add('hidden');
+        gameContainer.classList.remove('hidden');
+        
+        let nationsForMode;
+        if (mode.countries === "ALL") {
+            nationsForMode = allNations;
+        } else {
+            const countryIds = new Set(mode.countries);
+            nationsForMode = allNations.filter(nation => countryIds.has(nation.id));
+        }
+
+        fetch('questions.json')
+            .then(response => response.json())
+            .then(questionsData => {
+                runGame(nationsForMode, questionsData);
+            })
+            .catch(error => {
+                console.error("Could not load questions.json:", error);
+                 gameContainer.innerHTML = `<div style="text-align: center; padding: 50px; font-family: sans-serif;">
+                    <h1>Error</h1><p>Could not load question data. Please check the console.</p></div>`;
+            });
     }
 
-    function updateSubmitButtonState() {
-        submitTurnBtn.disabled = !(selectedCountryGuess && selectedQuestion);
-    }
+    function runGame(nations, questionsData) {
+        // --- GAME STATE ---
+        let secretCountry = null;
+        let selectedCountryGuess = null;
+        let selectedQuestion = null;
+        let activeFilter = null;
+        
+        // --- CORE GAME LOGIC ---
+        function initializeGame() {
+            secretCountry = nations[Math.floor(Math.random() * nations.length)];
+            console.log(`Secret Country: ${secretCountry.name} (ID: ${secretCountry.id})`); // For debugging
 
-    // --- SELECTION HANDLERS ---
-    
-    function selectCountryGuess(nation) {
-        selectedCountryGuess = nation;
-        countryGuessInput.value = nation.name;
-        countryDropdown.style.display = 'none';
-        updateSubmitButtonState();
-    }
-    
-    function selectQuestion(question) {
-        selectedQuestion = question;
-        questionInput.value = question.question;
-        questionDropdown.style.display = 'none';
-        updateSubmitButtonState();
-    }
+            resetTurnState();
+            activeFilter = null;
+            turnLog.innerHTML = '';
 
-    // --- EVENT LISTENERS ---
-    countryGuessInput.addEventListener('input', renderCountryGuesses);
-    questionInput.addEventListener('input', renderQuestions);
-    countryGuessInput.addEventListener('focus', renderCountryGuesses);
-    questionInput.addEventListener('focus', renderQuestions);
-    submitTurnBtn.addEventListener('click', submitTurn);
-    playAgainBtn.addEventListener('click', initializeGame);
+            winModal.classList.add('hidden');
+            [countryGuessInput, questionInput].forEach(el => el.disabled = false);
+            
+            submitTurnBtn.classList.remove('hidden');
+            newGameBtn.classList.add('hidden');
+            
+            renderFilterButtons();
+            updateSubmitButtonState();
+        }
+        
+        function resetTurnState() {
+            selectedCountryGuess = null;
+            selectedQuestion = null;
+            countryGuessInput.value = '';
+            questionInput.value = '';
+            questionInput.readOnly = true; 
+            updateSubmitButtonState();
+        }
 
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.search-wrapper')) {
+        function submitTurn() {
+            if (!selectedCountryGuess || !selectedQuestion) return;
+
+            const isYes = selectedQuestion.countries.includes(secretCountry.id);
+            logTurn(selectedCountryGuess, selectedQuestion, isYes);
+
+            // Check for a win AFTER logging the turn
+            if (selectedCountryGuess.id === secretCountry.id) {
+                showWinScreen();
+            } else {
+                resetTurnState();
+            }
+        }
+
+        function showWinScreen() {
+            secretCountryNameSpan.textContent = secretCountry.name;
+            winModal.classList.remove('hidden');
+            [countryGuessInput, questionInput].forEach(el => el.disabled = true);
+            
+            submitTurnBtn.classList.add('hidden');
+            newGameBtn.classList.remove('hidden');
+            
+            filterContainer.style.pointerEvents = 'none';
+        }
+
+        // --- UI RENDERING & UPDATES ---
+        
+        function renderCountryGuesses(options = {}) {
+            questionDropdown.style.display = 'none'; // Hide other dropdown
+            const query = options.forceShowAll ? '' : countryGuessInput.value.toLowerCase();
+            const filteredNations = nations.filter(n => n.name.toLowerCase().includes(query));
+            
+            countryDropdown.innerHTML = '';
+            filteredNations.forEach(nation => {
+                const item = createDropdownItem(nation.name, () => selectCountryGuess(nation));
+                countryDropdown.appendChild(item);
+            });
+            countryDropdown.style.display = 'block';
+        }
+
+        function renderQuestions(options = {}) {
+            countryDropdown.style.display = 'none'; // Hide other dropdown
+            const query = options.forceShowAll ? '' : questionInput.value.toLowerCase();
+            const questionsToDisplay = [];
+            questionDropdown.innerHTML = '';
+
+            const categoriesToRender = activeFilter 
+                ? questionsData.categories.filter(c => c.name === activeFilter)
+                : questionsData.categories;
+
+            categoriesToRender.forEach(category => {
+                category.questions
+                    .filter(q => q.question.toLowerCase().includes(query))
+                    .forEach(q => questionsToDisplay.push(q));
+            });
+            
+            questionsToDisplay.sort((a, b) => a.question.localeCompare(b.question));
+
+            questionsToDisplay.forEach(q => {
+                const item = createDropdownItem(q.question, () => selectQuestion(q));
+                questionDropdown.appendChild(item);
+            });
+            
+            questionDropdown.style.display = 'block';
+        }
+
+
+        function createDropdownItem(text, onClick, extraClass = '') {
+            const item = document.createElement('div');
+            item.className = `dropdown-item ${extraClass}`;
+            item.textContent = text;
+            if (onClick) {
+                item.addEventListener('click', onClick);
+            }
+            return item;
+        }
+        
+        function logTurn(country, question, isYes) {
+            const logItem = document.createElement('div');
+            logItem.className = 'turn-log-item';
+            const guessPart = document.createElement('div');
+            guessPart.className = 'log-part';
+            guessPart.innerHTML = `Guessed: <strong>${country.name}</strong>`;
+            const questionPart = document.createElement('div');
+            questionPart.className = 'log-part';
+            questionPart.textContent = `Asked: ${question.question}`;
+            const answerPart = document.createElement('div');
+            answerPart.className = `log-answer ${isYes ? 'yes' : 'no'}`;
+            answerPart.textContent = isYes ? 'YES' : 'NO';
+            logItem.append(guessPart, questionPart, answerPart);
+            turnLog.prepend(logItem);
+        }
+        
+        function renderFilterButtons() {
+            filterContainer.innerHTML = '';
+            filterContainer.style.pointerEvents = 'auto';
+            const allButton = document.createElement('button');
+            allButton.className = 'filter-btn active';
+            allButton.textContent = 'All Categories';
+            allButton.addEventListener('click', () => setFilter(null));
+            filterContainer.appendChild(allButton);
+            questionsData.categories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'filter-btn';
+                button.textContent = category.name;
+                button.addEventListener('click', () => setFilter(category.name));
+                filterContainer.appendChild(button);
+            });
+        }
+
+        function setFilter(categoryName) {
+            activeFilter = categoryName;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const isActive = (!categoryName && btn.textContent === 'All Categories') || (btn.textContent === categoryName);
+                btn.classList.toggle('active', isActive);
+            });
+            // Re-render the questions for the new filter without clearing the input
+            renderQuestions({ forceShowAll: true });
+        }
+
+        function updateSubmitButtonState() {
+            submitTurnBtn.disabled = !(selectedCountryGuess && selectedQuestion);
+        }
+
+        // --- SELECTION HANDLERS ---
+        
+        function selectCountryGuess(nation) {
+            selectedCountryGuess = nation;
+            countryGuessInput.value = nation.name;
             countryDropdown.style.display = 'none';
+            updateSubmitButtonState();
+        }
+        
+        function selectQuestion(question) {
+            selectedQuestion = question;
+            questionInput.value = question.question;
+            questionInput.readOnly = true; 
             questionDropdown.style.display = 'none';
+            updateSubmitButtonState();
+        }
+
+        // --- EVENT LISTENERS (specific to the game instance) ---
+        countryGuessInput.addEventListener('input', () => renderCountryGuesses());
+        questionInput.addEventListener('input', () => renderQuestions());
+
+        // Open dropdowns on direct click of the input element only
+        countryGuessInput.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event bubbling
+        if (e.target === countryGuessInput) {
+        renderCountryGuesses({ forceShowAll: true });
         }
     });
 
-    // --- INITIALIZE ---
-    initializeGame();
+        questionInput.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event bubbling
+        if (e.target === questionInput && questionInput.readOnly) {
+        renderQuestions({ forceShowAll: true });
+        }
+    });
+
+        submitTurnBtn.addEventListener('click', submitTurn);
+        newGameBtn.addEventListener('click', initialize); // Use the main initialize to go back to modes
+        
+        typeQuestionBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            questionInput.readOnly = false;
+            questionInput.focus();
+            renderQuestions(); 
+        });
+        
+        modalCloseBtn.addEventListener('click', () => {
+            winModal.classList.add('hidden');
+        });
+
+        // Global listener to close dropdowns
+        document.addEventListener('click', (e) => {
+        const clickedElement = e.target;
+        const searchWrapper = clickedElement.closest('.search-wrapper');
+        const isInputClick = clickedElement === countryGuessInput || clickedElement === questionInput;
+    
+        // Only close dropdowns if click is completely outside search wrappers and not on inputs
+        if (!searchWrapper && !isInputClick) {
+            countryDropdown.style.display = 'none';
+            questionDropdown.style.display = 'none';
+            questionInput.readOnly = true;
+        }
+    });
+
+        // --- INITIALIZE THE GAME ---
+        initializeGame();
+    }
+    
+    // --- START THE WHOLE PROCESS ---
+    initialize();
 });

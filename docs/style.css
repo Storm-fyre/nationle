@@ -16,12 +16,69 @@ body {
     color: var(--primary-text);
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center; /* Center vertically */
     min-height: 100vh;
-    padding: 2rem;
+    padding: 1rem; /* Adjusted padding for smaller screens */
     margin: 0;
+    box-sizing: border-box;
 }
 
+/* --- Mode Selection --- */
+#mode-selection-container {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    padding: 2rem;
+    background: var(--secondary-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+#mode-selection-container h1 {
+    font-size: 3.5rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+#mode-selection-container p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2.5rem;
+}
+
+#mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mode-btn {
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.mode-btn:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.mode-btn .mode-description {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 0.25rem;
+}
+
+
+/* --- Main Game --- */
 .game-container {
     width: 100%;
     max-width: 800px;
@@ -31,12 +88,12 @@ body {
     padding: 2rem;
 }
 
-header {
+.game-container header {
     text-align: center;
     margin-bottom: 2rem;
 }
 
-header h1 {
+.game-container header h1 {
     font-size: 2.5rem;
     color: var(--accent-color);
     margin: 0;
@@ -57,6 +114,7 @@ header h1 {
     margin-bottom: 0.5rem;
     display: block;
     color: var(--primary-text);
+    pointer-events: none; /* Prevent labels from intercepting clicks */
 }
 
 .search-wrapper {
@@ -72,6 +130,12 @@ input[type="text"] {
     border: 1px solid var(--border-color);
     box-sizing: border-box;
     transition: border-color 0.3s;
+    cursor: pointer; /* Indicate it's clickable */
+}
+
+#question-input {
+    /* Make space on the right for the "Type" button */
+    padding-right: 75px !important;
 }
 
 input[type="text"]:focus {
@@ -91,6 +155,8 @@ input[type="text"]:focus {
     overflow-y: auto;
     z-index: 1000;
     margin-top: 0.5rem;
+    /* Prevents the main page from scrolling when the dropdown is scrolled */
+    overscroll-behavior: contain;
 }
 
 .dropdown-item {
@@ -113,6 +179,27 @@ input[type="text"]:focus {
     color: var(--accent-color);
     background-color: #f8f9fa;
     cursor: default;
+}
+
+#type-question-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 5; /* Ensure it's above the input field */
+}
+
+#type-question-btn:hover {
+    background-color: var(--accent-hover);
 }
 
 #filter-container {
@@ -148,26 +235,36 @@ input[type="text"]:focus {
     margin: 1.5rem 0;
 }
 
-#submit-turn-btn {
+#submit-turn-btn, #new-game-btn {
     padding: 0.8rem 2.5rem;
     font-size: 1.1rem;
     font-weight: 600;
-    background-color: var(--yes-color);
-    color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
+#submit-turn-btn {
+    background-color: var(--yes-color);
+    color: white;
+}
 #submit-turn-btn:hover {
     background-color: #218838;
 }
-
 #submit-turn-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
+
+#new-game-btn {
+    background-color: var(--accent-color);
+    color: white;
+}
+#new-game-btn:hover {
+    background-color: var(--accent-hover);
+}
+
 
 .feedback-container {
     margin-top: 1rem;
@@ -206,28 +303,66 @@ input[type="text"]:focus {
 
 .hidden { display: none !important; }
 
-#win-message {
+/* --- Win Modal --- */
+#win-modal {
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--secondary-bg);
+    padding: 2rem 3rem;
+    border-radius: 12px;
     text-align: center;
-    padding: 2rem;
-    background-color: #e6f7ff;
-    border: 1px solid var(--accent-color);
-    border-radius: 8px;
-    margin-top: 2rem;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-#play-again-btn {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
+#modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
-    margin-top: 1rem;
-    transition: background-color 0.3s;
 }
 
-#play-again-btn:hover {
-    background-color: var(--accent-hover);
+#modal-close-btn:hover {
+    color: #333;
+}
+
+
+/* --- Responsive Design for Mobile --- */
+@media (max-width: 768px) {
+    body {
+        padding: 0.5rem; /* Reduce padding on small screens */
+        align-items: flex-start; /* Align to top on mobile */
+        padding-top: 1rem;
+    }
+
+    .interaction-area {
+        flex-direction: column; /* Stack input fields vertically */
+        gap: 1.5rem; /* Adjust gap for vertical layout */
+    }
+
+    .game-container {
+        padding: 1rem;
+    }
+
+    #mode-selection-container {
+        padding: 1rem;
+    }
+    
+    #mode-selection-container h1 {
+        font-size: 2.5rem;
+    }
 }

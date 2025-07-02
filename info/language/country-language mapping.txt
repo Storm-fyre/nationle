@@ -1,0 +1,195 @@
+Afghanistan: Pashto
+Albania: Albanian
+Algeria: Arabic
+Andorra: Catalan
+Angola: Portuguese
+Antigua and Barbuda: English
+Argentina: Spanish
+Armenia: Armenian
+Australia: English
+Austria: German
+Azerbaijan: Azerbaijani
+Bahamas: English
+Bahrain: Arabic
+Bangladesh: Bengali
+Barbados: English
+Belarus: Russian
+Belgium: Dutch
+Belize: English
+Benin: French
+Bhutan: Dzongkha
+Bolivia: Spanish
+Bosnia and Herzegovina: Bosnian
+Botswana: Tswana
+Brazil: Portuguese
+Brunei: Malay
+Bulgaria: Bulgarian
+Burkina Faso: French
+Burundi: Kirundi
+Cabo Verde: Portuguese
+Cambodia: Khmer
+Cameroon: French
+Canada: English
+Central African Republic: Sango
+Chad: Arabic
+Chile: Spanish
+China: Mandarin
+Colombia: Spanish
+Comoros: Comorian
+Costa Rica: Spanish
+Croatia: Croatian
+Cuba: Spanish
+Cyprus: Greek
+Czechia: Czech
+Democratic Republic of the Congo: Lingala
+Democratic People's Republic of Korea: Korean
+Denmark: Danish
+Djibouti: Somali
+Dominica: English
+Dominican Republic: Spanish
+Ecuador: Spanish
+Egypt: Arabic
+El Salvador: Spanish
+Equatorial Guinea: Spanish
+Eritrea: Tigrinya
+Estonia: Estonian
+Eswatini: Swazi
+Ethiopia: Amharic
+Fiji: English
+Finland: Finnish
+France: French
+Gabon: French
+Gambia: English
+Georgia: Georgian
+Germany: German
+Ghana: English
+Greece: Greek
+Grenada: English
+Guatemala: Spanish
+Guinea: French
+Guinea-Bissau: Portuguese
+Guyana: English
+Haiti: Haitian Creole
+Honduras: Spanish
+Hungary: Hungarian
+Iceland: Icelandic
+India: Hindi
+Indonesia: Indonesian
+Iran: Persian
+Iraq: Arabic
+Ireland: English
+Israel: Hebrew
+Italy: Italian
+Jamaica: English
+Japan: Japanese
+Jordan: Arabic
+Kazakhstan: Russian
+Kenya: Swahili
+Kiribati: English
+Kuwait: Arabic
+Kyrgyzstan: Kyrgyz
+Lao People's Democratic Republic: Lao
+Latvia: Latvian
+Lebanon: Arabic
+Lesotho: Sesotho
+Liberia: English
+Libya: Arabic
+Liechtenstein: German
+Lithuania: Lithuanian
+Luxembourg: Luxembourgish
+Madagascar: Malagasy
+Malawi: Chichewa
+Malaysia: Malay
+Maldives: Dhivehi
+Mali: French
+Malta: Maltese
+Marshall Islands: Marshallese
+Mauritania: Arabic
+Mauritius: English
+Mexico: Spanish
+Micronesia: English
+Monaco: French
+Mongolia: Mongolian
+Montenegro: Montenegrin
+Morocco: Arabic
+Mozambique: Portuguese
+Myanmar: Burmese
+Namibia: English
+Nauru: English
+Nepal: Nepali
+Netherlands: Dutch
+New Zealand: English
+Nicaragua: Spanish
+Niger: French
+Nigeria: English
+North Macedonia: Macedonian
+Norway: Norwegian
+Oman: Arabic
+Pakistan: Urdu
+Palau: English
+Panama: Spanish
+Papua New Guinea: Tok Pisin
+Paraguay: Spanish
+Peru: Spanish
+Philippines: Filipino
+Poland: Polish
+Portugal: Portuguese
+Qatar: Arabic
+Republic of Korea: Korean
+Republic of Moldova: Romanian
+Romania: Romanian
+Russian Federation: Russian
+Rwanda: Kinyarwanda
+Saint Kitts and Nevis: English
+Saint Lucia: English
+Saint Vincent and the Grenadines: English
+Samoa: Samoan
+San Marino: Italian
+Sao Tome and Principe: Portuguese
+Saudi Arabia: Arabic
+Senegal: French
+Serbia: Serbian
+Seychelles: English
+Sierra Leone: English
+Singapore: English
+Slovakia: Slovak
+Slovenia: Slovene
+Solomon Islands: English
+Somalia: Somali
+South Africa: English
+South Sudan: Dinka
+Spain: Spanish
+Sri Lanka: Sinhala
+Sudan: Arabic
+Suriname: Dutch
+Sweden: Swedish
+Switzerland: German
+Syrian Arab Republic: Arabic
+Tajikistan: Tajik
+Thailand: Thai
+Timor-Leste: Tetum
+Togo: French
+Tonga: Tongan
+Trinidad and Tobago: English
+Tunisia: Arabic
+Türkiye: Turkish
+Turkmenistan: Turkmen
+Tuvalu: Tuvaluan
+Uganda: English
+Ukraine: Ukrainian
+United Arab Emirates: Arabic
+United Kingdom: English
+United Republic of Tanzania: Swahili
+United States of America: English
+Uruguay: Spanish
+Uzbekistan: Uzbek
+Vanuatu: Bislama
+Venezuela: Spanish
+Vietnam: Vietnamese
+Yemen: Arabic
+Zambia: English
+Zimbabwe: English
+Palestine: Arabic
+Republic of Congo: Kituba
+Ivory Coast: Dioula
+Vatican City: Italian

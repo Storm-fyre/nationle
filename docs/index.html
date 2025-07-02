@@ -5,10 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nationle</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="game-container">
+
+    <div id="mode-selection-container">
+        <header>
+            <h1 id="main-title">Nationle</h1>
+            <p id="main-subtitle">Select a difficulty to begin your challenge!</p>
+        </header>
+        <div id="mode-buttons">
+            <!-- Mode buttons will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <div class="game-container hidden">
         <header>
             <h1>Nationle</h1>
             <p>Guess a country, then ask a question to test your theory!</p>
@@ -18,7 +29,7 @@
             <div class="input-column">
                 <label for="country-guess-input">1. Guess a Country</label>
                 <div class="search-wrapper">
-                    <input type="text" id="country-guess-input" placeholder="Type a country name...">
+                    <input type="text" id="country-guess-input" placeholder="Click to select a country...">
                     <div id="country-dropdown" class="dropdown-content"></div>
                 </div>
             </div>
@@ -26,7 +37,8 @@
             <div class="input-column">
                 <label for="question-input">2. Ask a Question</label>
                 <div class="search-wrapper">
-                    <input type="text" id="question-input" placeholder="Type or select a question...">
+                    <input type="text" id="question-input" placeholder="Click to select a question...">
+                    <button id="type-question-btn">Type</button>
                     <div id="question-dropdown" class="dropdown-content"></div>
                 </div>
             </div>
@@ -38,6 +50,7 @@
 
         <div class="submit-container">
             <button id="submit-turn-btn">Submit Guess</button>
+            <button id="new-game-btn" class="hidden">New Game</button>
         </div>
 
         <div class="feedback-container">
@@ -46,13 +59,17 @@
                 <!-- Log of turns will appear here -->
             </div>
         </div>
+    </div>
 
-        <div id="win-message" class="hidden">
-            <h2>You Guessed It! Congratulations!</h2>
+    <!-- Win Message Modal -->
+    <div id="win-modal" class="hidden">
+        <div class="modal-content">
+            <span id="modal-close-btn">×</span>
+            <h2>You Guessed It!</h2>
             <p>The secret country was <strong id="secret-country-name"></strong>!</p>
-            <button id="play-again-btn">Play Again</button>
         </div>
     </div>
+
 
     <script src="script.js"></script>
 </body>
