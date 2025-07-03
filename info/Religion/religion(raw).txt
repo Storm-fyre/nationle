@@ -1,0 +1,193 @@
+| Afghanistan | Islam | Sunni |
+| Albania | Islam | Sunni |
+| Algeria | Islam | Sunni |
+| Andorra | Christianity | Catholic |
+| Angola | Christianity | Catholic |
+| Antigua and Barbuda | Christianity | Protestant |
+| Argentina | Christianity | Catholic |
+| Armenia | Christianity | Armenian Apostolic (Oriental Orthodox) |
+| Australia | Christianity | Catholic |
+| Austria | Christianity | Catholic |
+| Azerbaijan | Islam | Shia |
+| Bahamas | Christianity | Protestant |
+| Bahrain | Islam | Shia |
+| Bangladesh | Islam | Sunni |
+| Barbados | Christianity | Protestant |
+| Belarus | Christianity | Eastern Orthodox |
+| Belgium | Christianity | Catholic |
+| Belize | Christianity | Catholic |
+| Benin | Christianity | Catholic |
+| Bhutan | Buddhism | Vajrayana (no clear denomination) |
+| Bolivia | Christianity | Catholic |
+| Bosnia and Herzegovina | Islam | Sunni |
+| Botswana | Christianity | Protestant |
+| Brazil | Christianity | Catholic |
+| Brunei | Islam | Sunni |
+| Bulgaria | Christianity | Eastern Orthodox |
+| Burkina Faso | Islam | Sunni |
+| Burundi | Christianity | Catholic |
+| Cabo Verde | Christianity | Catholic |
+| Cambodia | Buddhism | Theravada (no clear denomination) |
+| Cameroon | Christianity | Catholic |
+| Canada | Christianity | Catholic |
+| Central African Republic | Christianity | Protestant |
+| Chad | Islam | Sunni |
+| Chile | Christianity | Catholic |
+| China | Folk Religions | No clear denomination |
+| Colombia | Christianity | Catholic |
+| Comoros | Islam | Sunni |
+| Costa Rica | Christianity | Catholic |
+| Côte d'Ivoire | Islam | Sunni |
+| Croatia | Christianity | Catholic |
+| Cuba | Christianity | Catholic |
+| Cyprus | Christianity | Eastern Orthodox |
+| Czech Republic | None (Unaffiliated) | No clear denomination |
+| Democratic Republic of the Congo | Christianity | Catholic |
+| Denmark | Christianity | Protestant (Lutheran) |
+| Djibouti | Islam | Sunni |
+| Dominica | Christianity | Catholic |
+| Dominican Republic | Christianity | Catholic |
+| Ecuador | Christianity | Catholic |
+| Egypt | Islam | Sunni |
+| El Salvador | Christianity | Catholic |
+| Equatorial Guinea | Christianity | Catholic |
+| Eritrea | Christianity | Coptic Orthodox |
+| Estonia | None (Unaffiliated) | No clear denomination |
+| Eswatini | Christianity | Protestant |
+| Ethiopia | Christianity | Ethiopian Orthodox (Oriental Orthodox) |
+| Fiji | Christianity | Protestant |
+| Finland | Christianity | Protestant (Lutheran) |
+| France | Christianity | Catholic |
+| Gabon | Christianity | Catholic |
+| Gambia | Islam | Sunni |
+| Georgia | Christianity | Eastern Orthodox |
+| Germany | Christianity | Catholic |
+| Ghana | Christianity | Protestant |
+| Greece | Christianity | Eastern Orthodox |
+| Grenada | Christianity | Protestant |
+| Guatemala | Christianity | Catholic |
+| Guinea | Islam | Sunni |
+| Guinea-Bissau | Islam | Sunni |
+| Guyana | Christianity | Protestant |
+| Haiti | Christianity | Catholic |
+| Honduras | Christianity | Catholic |
+| Hungary | Christianity | Catholic |
+| Iceland | Christianity | Protestant (Lutheran) |
+| India | Hinduism | No clear denomination |
+| Indonesia | Islam | Sunni |
+| Iran | Islam | Shia |
+| Iraq | Islam | Shia |
+| Ireland | Christianity | Catholic |
+| Israel | Judaism | No clear denomination |
+| Italy | Christianity | Catholic |
+| Jamaica | Christianity | Protestant |
+| Japan | Shinto | No clear denomination |
+| Jordan | Islam | Sunni |
+| Kazakhstan | Islam | Sunni |
+| Kenya | Christianity | Protestant |
+| Kiribati | Christianity | Catholic |
+| Kuwait | Islam | Sunni |
+| Kyrgyzstan | Islam | Sunni |
+| Laos | Buddhism | Theravada (no clear denomination) |
+| Latvia | Christianity | Protestant (Lutheran) |
+| Lebanon | Christianity | Maronite (Catholic) |
+| Lesotho | Christianity | Protestant |
+| Liberia | Christianity | Protestant |
+| Libya | Islam | Sunni |
+| Liechtenstein | Christianity | Catholic |
+| Lithuania | Christianity | Catholic |
+| Luxembourg | Christianity | Catholic |
+| Madagascar | Christianity | Protestant |
+| Malawi | Christianity | Protestant |
+| Malaysia | Islam | Sunni |
+| Maldives | Islam | Sunni |
+| Mali | Islam | Sunni |
+| Malta | Christianity | Catholic |
+| Marshall Islands | Christianity | Protestant |
+| Mauritania | Islam | Sunni |
+| Mauritius | Hinduism | No clear denomination |
+| Mexico | Christianity | Catholic |
+| Micronesia | Christianity | Catholic |
+| Moldova | Christianity | Eastern Orthodox |
+| Monaco | Christianity | Catholic |
+| Mongolia | Buddhism | Vajrayana (no clear denomination) |
+| Montenegro | Christianity | Eastern Orthodox |
+| Morocco | Islam | Sunni |
+| Mozambique | Christianity | Catholic |
+| Myanmar | Buddhism | Theravada (no clear denomination) |
+| Namibia | Christianity | Protestant |
+| Nauru | Christianity | Protestant |
+| Nepal | Hinduism | No clear denomination |
+| Netherlands | Christianity | Catholic |
+| New Zealand | Christianity | Protestant |
+| Nicaragua | Christianity | Catholic |
+| Niger | Islam | Sunni |
+| Nigeria | Islam | Sunni |
+| North Korea | None (State Atheism) | No clear denomination |
+| North Macedonia | Christianity | Eastern Orthodox |
+| Norway | Christianity | Protestant (Lutheran) |
+| Oman | Islam | Ibadi |
+| Pakistan | Islam | Sunni |
+| Palau | Christianity | Catholic |
+| Panama | Christianity | Catholic |
+| Papua New Guinea | Christianity | Protestant |
+| Paraguay | Christianity | Catholic |
+| Peru | Christianity | Catholic |
+| Philippines | Christianity | Catholic |
+| Poland | Christianity | Catholic |
+| Portugal | Christianity | Catholic |
+| Qatar | Islam | Sunni |
+| Republic of the Congo | Christianity | Catholic |
+| Romania | Christianity | Eastern Orthodox |
+| Russia | Christianity | Eastern Orthodox |
+| Rwanda | Christianity | Catholic |
+| Saint Kitts and Nevis | Christianity | Protestant |
+| Saint Lucia | Christianity | Catholic |
+| Saint Vincent and the Grenadines | Christianity | Protestant |
+| Samoa | Christianity | Protestant |
+| San Marino | Christianity | Catholic |
+| Sao Tome and Principe | Christianity | Catholic |
+| Saudi Arabia | Islam | Sunni |
+| Senegal | Islam | Sunni |
+| Serbia | Christianity | Eastern Orthodox |
+| Seychelles | Christianity | Catholic |
+| Sierra Leone | Islam | Sunni |
+| Singapore | Buddhism | No clear denomination |
+| Slovakia | Christianity | Catholic |
+| Slovenia | Christianity | Catholic |
+| Solomon Islands | Christianity | Protestant |
+| Somalia | Islam | Sunni |
+| South Africa | Christianity | Protestant |
+| South Korea | None (Unaffiliated) | No clear denomination |
+| South Sudan | Christianity | Protestant |
+| Spain | Christianity | Catholic |
+| Sri Lanka | Buddhism | Theravada (no clear denomination) |
+| Sudan | Islam | Sunni |
+| Suriname | Christianity | Catholic |
+| Sweden | Christianity | Protestant (Lutheran) |
+| Switzerland | Christianity | Catholic |
+| Syria | Islam | Sunni |
+| Tajikistan | Islam | Sunni |
+| Tanzania | Christianity | Protestant |
+| Thailand | Buddhism | Theravada (no clear denomination) |
+| Timor-Leste | Christianity | Catholic |
+| Togo | Christianity | Catholic |
+| Tonga | Christianity | Protestant |
+| Trinidad and Tobago | Christianity | Protestant |
+| Tunisia | Islam | Sunni |
+| Türkiye | Islam | Sunni |
+| Turkmenistan | Islam | Sunni |
+| Tuvalu | Christianity | Protestant |
+| Uganda | Christianity | Protestant |
+| Ukraine | Christianity | Eastern Orthodox |
+| United Arab Emirates | Islam | Sunni |
+| United Kingdom | Christianity | Protestant (Anglican) |
+| United States | Christianity | Protestant |
+| Uruguay | Christianity | Catholic |
+| Uzbekistan | Islam | Sunni |
+| Vanuatu | Christianity | Protestant |
+| Venezuela | Christianity | Catholic |
+| Vietnam | Folk Religions | No clear denomination |
+| Yemen | Islam | Sunni |
+| Zambia | Christianity | Protestant |
+| Zimbabwe | Christianity | Protestant |
