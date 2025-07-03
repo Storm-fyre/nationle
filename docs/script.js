@@ -14,12 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const questionDropdown = document.getElementById('question-dropdown');
     const filterContainer = document.getElementById('filter-container');
     const submitTurnBtn = document.getElementById('submit-turn-btn');
+    const giveUpBtn = document.getElementById('give-up-btn');
     const newGameBtn = document.getElementById('new-game-btn');
     const turnLog = document.getElementById('turn-log');
     
     const winModal = document.getElementById('win-modal');
     const secretCountryNameSpan = document.getElementById('secret-country-name');
     const modalCloseBtn = document.getElementById('modal-close-btn');
+    
+    const giveUpModal = document.getElementById('give-up-modal');
+    const giveUpCountryNameSpan = document.getElementById('give-up-country-name');
+    const giveUpModalCloseBtn = document.getElementById('give-up-modal-close-btn');
 
     // --- GLOBAL VARIABLES ---
     let allNations = [];
@@ -96,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let selectedCountryGuess = null;
         let selectedQuestion = null;
         let activeFilter = null;
+        let usedCountries = new Set(); // Track countries that have been used
+        let gameEnded = false; // Track if the game has ended (won or given up)
         
         // --- CORE GAME LOGIC ---
         function initializeGame() {
@@ -104,13 +111,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
             resetTurnState();
             activeFilter = null;
+            usedCountries.clear(); // Clear used countries for new game
+            gameEnded = false; // Reset game ended state
             turnLog.innerHTML = '';
 
+            // Hide all modals
             winModal.classList.add('hidden');
+            giveUpModal.classList.add('hidden');
+            
+            // Enable inputs
             [countryGuessInput, questionInput].forEach(el => el.disabled = false);
             
+            // Remove correct answer styling from input field
+            countryGuessInput.classList.remove('correct-answer-input');
+            
+            // Reset button states
             submitTurnBtn.classList.remove('hidden');
+            giveUpBtn.classList.remove('hidden');
             newGameBtn.classList.add('hidden');
+            newGameBtn.textContent = 'Play Again'; // Set button text
             
             renderFilterButtons();
             updateSubmitButtonState();
@@ -119,9 +138,14 @@ document.addEventListener('DOMContentLoaded', () => {
         function resetTurnState() {
             selectedCountryGuess = null;
             selectedQuestion = null;
-            countryGuessInput.value = '';
+            // Only clear input if game hasn't ended
+            if (!gameEnded) {
+                countryGuessInput.value = '';
+            }
             questionInput.value = '';
             questionInput.readOnly = true; 
+            countryDropdown.style.display = 'none';
+            questionDropdown.style.display = 'none';
             updateSubmitButtonState();
         }
 
@@ -131,12 +155,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const isYes = selectedQuestion.countries.includes(secretCountry.id);
             logTurn(selectedCountryGuess, selectedQuestion, isYes);
 
+            // Add the country to used countries
+            usedCountries.add(selectedCountryGuess.id);
+
             // Check for a win AFTER logging the turn
             if (selectedCountryGuess.id === secretCountry.id) {
+                gameEnded = true;
+                // Add styling to show correct answer in input field
+                countryGuessInput.classList.add('correct-answer-input');
                 showWinScreen();
             } else {
                 resetTurnState();
             }
+        }
+
+        function giveUp() {
+            gameEnded = true;
+            // Set the correct country in the input field
+            countryGuessInput.value = secretCountry.name;
+            selectedCountryGuess = secretCountry;
+            // Add styling to show the answer
+            countryGuessInput.classList.add('correct-answer-input');
+            showGiveUpScreen();
         }
 
         function showWinScreen() {
@@ -145,6 +185,19 @@ document.addEventListener('DOMContentLoaded', () => {
             [countryGuessInput, questionInput].forEach(el => el.disabled = true);
             
             submitTurnBtn.classList.add('hidden');
+            giveUpBtn.classList.add('hidden');
+            newGameBtn.classList.remove('hidden');
+            
+            filterContainer.style.pointerEvents = 'none';
+        }
+
+        function showGiveUpScreen() {
+            giveUpCountryNameSpan.textContent = secretCountry.name;
+            giveUpModal.classList.remove('hidden');
+            [countryGuessInput, questionInput].forEach(el => el.disabled = true);
+            
+            submitTurnBtn.classList.add('hidden');
+            giveUpBtn.classList.add('hidden');
             newGameBtn.classList.remove('hidden');
             
             filterContainer.style.pointerEvents = 'none';
@@ -152,17 +205,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- UI RENDERING & UPDATES ---
         
-        function renderCountryGuesses(options = {}) {
+        function renderCountryGuesses() {
             questionDropdown.style.display = 'none'; // Hide other dropdown
-            const query = options.forceShowAll ? '' : countryGuessInput.value.toLowerCase();
-            const filteredNations = nations.filter(n => n.name.toLowerCase().includes(query));
+            const query = countryGuessInput.value.toLowerCase().trim();
+            
+            // Only show dropdown if user has typed something and game hasn't ended
+            if (query === '' || gameEnded) {
+                countryDropdown.style.display = 'none';
+                return;
+            }
+            
+            // Filter countries that start with the query
+            const filteredNations = nations.filter(n => 
+                n.name.toLowerCase().startsWith(query)
+            );
             
             countryDropdown.innerHTML = '';
             filteredNations.forEach(nation => {
-                const item = createDropdownItem(nation.name, () => selectCountryGuess(nation));
+                const isUsed = usedCountries.has(nation.id);
+                
+                let displayText = nation.name;
+                let extraClass = '';
+                let clickHandler = null;
+                
+                if (isUsed) {
+                    displayText = `${nation.name} (Already Submitted)`;
+                    extraClass = 'used-country';
+                    // No click handler for used countries
+                } else {
+                    clickHandler = () => selectCountryGuess(nation);
+                }
+                
+                const item = createDropdownItem(displayText, clickHandler, extraClass);
                 countryDropdown.appendChild(item);
             });
-            countryDropdown.style.display = 'block';
+            
+            countryDropdown.style.display = filteredNations.length > 0 ? 'block' : 'none';
         }
 
         function renderQuestions(options = {}) {
@@ -181,8 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .forEach(q => questionsToDisplay.push(q));
             });
             
-            questionsToDisplay.sort((a, b) => a.question.localeCompare(b.question));
-
+            // Don't sort - preserve original order from questions.json
             questionsToDisplay.forEach(q => {
                 const item = createDropdownItem(q.question, () => selectQuestion(q));
                 questionDropdown.appendChild(item);
@@ -190,7 +267,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             questionDropdown.style.display = 'block';
         }
-
 
         function createDropdownItem(text, onClick, extraClass = '') {
             const item = document.createElement('div');
@@ -246,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function updateSubmitButtonState() {
-            submitTurnBtn.disabled = !(selectedCountryGuess && selectedQuestion);
+            submitTurnBtn.disabled = !(selectedCountryGuess && selectedQuestion) || gameEnded;
         }
 
         // --- SELECTION HANDLERS ---
@@ -266,52 +342,125 @@ document.addEventListener('DOMContentLoaded', () => {
             updateSubmitButtonState();
         }
 
+        // Helper function to validate and select country by name
+        function validateAndSelectCountry(countryName) {
+            const exactMatch = nations.find(nation => 
+                nation.name.toLowerCase() === countryName.toLowerCase()
+            );
+            if (exactMatch && !usedCountries.has(exactMatch.id)) {
+                selectCountryGuess(exactMatch);
+                return true;
+            }
+            return false;
+        }
+
         // --- EVENT LISTENERS (specific to the game instance) ---
-        countryGuessInput.addEventListener('input', () => renderCountryGuesses());
-        questionInput.addEventListener('input', () => renderQuestions());
+        countryGuessInput.addEventListener('input', () => {
+            if (!gameEnded) {
+                renderCountryGuesses();
+                // Clear selection when user types
+                selectedCountryGuess = null;
+                updateSubmitButtonState();
+            }
+        });
+
+        countryGuessInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !gameEnded) {
+                e.preventDefault();
+                const query = countryGuessInput.value.trim();
+                
+                // Try to find exact match first
+                if (validateAndSelectCountry(query)) {
+                    return;
+                }
+                
+                // If no exact match, try to select the first available (non-used) item in dropdown
+                const firstAvailableItem = countryDropdown.querySelector('.dropdown-item:not(.used-country)');
+                if (firstAvailableItem) {
+                    const countryName = firstAvailableItem.textContent;
+                    const nation = nations.find(n => n.name === countryName);
+                    if (nation && !usedCountries.has(nation.id)) {
+                        selectCountryGuess(nation);
+                    }
+                }
+            }
+        });
+
+        countryGuessInput.addEventListener('blur', () => {
+            if (!gameEnded) {
+                // Small delay to allow click events on dropdown to fire first
+                setTimeout(() => {
+                    const query = countryGuessInput.value.trim();
+                    if (query && !selectedCountryGuess) {
+                        validateAndSelectCountry(query);
+                    }
+                }, 150);
+            }
+        });
+
+        questionInput.addEventListener('input', () => {
+            if (!gameEnded) {
+                renderQuestions();
+            }
+        });
 
         // Open dropdowns on direct click of the input element only
         countryGuessInput.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent event bubbling
-        if (e.target === countryGuessInput) {
-        renderCountryGuesses({ forceShowAll: true });
-        }
-    });
+            if (!gameEnded) {
+                e.stopPropagation(); // Prevent event bubbling
+                if (e.target === countryGuessInput) {
+                    if (countryGuessInput.value.trim()) {
+                        renderCountryGuesses();
+                    }
+                }
+            }
+        });
 
         questionInput.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent event bubbling
-        if (e.target === questionInput && questionInput.readOnly) {
-        renderQuestions({ forceShowAll: true });
-        }
-    });
+            if (!gameEnded) {
+                e.stopPropagation(); // Prevent event bubbling
+                if (e.target === questionInput && questionInput.readOnly) {
+                    renderQuestions({ forceShowAll: true });
+                }
+            }
+        });
 
         submitTurnBtn.addEventListener('click', submitTurn);
-        newGameBtn.addEventListener('click', initialize); // Use the main initialize to go back to modes
+        giveUpBtn.addEventListener('click', giveUp);
+        newGameBtn.addEventListener('click', initializeGame);
         
         typeQuestionBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            questionInput.readOnly = false;
-            questionInput.focus();
-            renderQuestions(); 
+            if (!gameEnded) {
+                e.stopPropagation(); 
+                questionInput.readOnly = false;
+                questionInput.focus();
+                renderQuestions(); 
+            }
         });
         
         modalCloseBtn.addEventListener('click', () => {
             winModal.classList.add('hidden');
         });
 
+        giveUpModalCloseBtn.addEventListener('click', () => {
+            giveUpModal.classList.add('hidden');
+        });
+
         // Global listener to close dropdowns
         document.addEventListener('click', (e) => {
-        const clickedElement = e.target;
-        const searchWrapper = clickedElement.closest('.search-wrapper');
-        const isInputClick = clickedElement === countryGuessInput || clickedElement === questionInput;
-    
-        // Only close dropdowns if click is completely outside search wrappers and not on inputs
-        if (!searchWrapper && !isInputClick) {
-            countryDropdown.style.display = 'none';
-            questionDropdown.style.display = 'none';
-            questionInput.readOnly = true;
-        }
-    });
+            if (!gameEnded) {
+                const clickedElement = e.target;
+                const searchWrapper = clickedElement.closest('.search-wrapper');
+                const isInputClick = clickedElement === countryGuessInput || clickedElement === questionInput;
+        
+                // Only close dropdowns if click is completely outside search wrappers and not on inputs
+                if (!searchWrapper && !isInputClick) {
+                    countryDropdown.style.display = 'none';
+                    questionDropdown.style.display = 'none';
+                    questionInput.readOnly = true;
+                }
+            }
+        });
 
         // --- INITIALIZE THE GAME ---
         initializeGame();

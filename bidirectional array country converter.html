@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Positional Array Generator</title>
+    <title>Bidirectional Array-Country Converter</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -35,6 +35,35 @@
             padding-bottom: 0.5rem;
             margin-top: 2rem;
         }
+
+        /* --- Mode Toggle Styles --- */
+        .mode-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border: 1px solid #1a73e8;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .toggle-btn {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: none;
+            background-color: #ffffff;
+            color: #1a73e8;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .toggle-btn.active {
+            background-color: #1a73e8;
+            color: white;
+        }
+        .toggle-btn:not(.active):hover {
+            background-color: #e8f0fe;
+        }
+        /* --- End Mode Toggle Styles --- */
+
         .input-container {
             position: relative;
         }
@@ -67,7 +96,7 @@
         #bulk-add-container {
             margin-top: 1.5rem;
         }
-        #country-list-input {
+        #country-list-input, #array-input {
             width: 100%;
             min-height: 100px;
             padding: 0.75rem;
@@ -76,6 +105,9 @@
             font-size: 1rem;
             box-sizing: border-box;
             resize: vertical;
+        }
+        #array-input {
+            font-family: "Courier New", Courier, monospace;
         }
         #process-list-btn {
             background-color: #28a745;
@@ -97,6 +129,7 @@
             border-radius: 5px;
             color: #856404;
             display: none;
+            clear:both;
         }
         #selected-countries-header {
             display: flex;
@@ -133,7 +166,7 @@
             font-size: 0.9rem;
         }
         .list-view ol {
-            list-style: none; 
+            list-style: none;
             padding-left: 0;
             margin: 0;
         }
@@ -156,13 +189,11 @@
              font-size: 0.9rem;
         }
         .actions-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-top: 2rem;
+            display: flex;
             gap: 1rem;
         }
-        #proceed-btn {
+        .main-action-btn {
             background-color: #1a73e8;
             color: white;
             padding: 0.75rem 1.5rem;
@@ -173,8 +204,13 @@
             transition: background-color 0.3s;
             flex-grow: 1;
         }
-        #proceed-btn:hover {
+        .main-action-btn:hover {
             background-color: #1558b3;
+        }
+        .shared-actions-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 2rem;
         }
         #clear-btn {
             background-color: #f44336;
@@ -194,39 +230,72 @@
             line-height: 1.6;
             font-family: "Courier New", Courier, monospace;
         }
+        #result .result-list {
+            list-style: decimal inside;
+            padding-left: 0;
+        }
+        #result .result-warning {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #fff3cd;
+            border-left: 5px solid #ffeeba;
+            color: #856404;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Positional Array Generator</h1>
-        
-        <h2>Option 1: Select Manually</h2>
-        <div class="input-container">
-            <input type="text" id="country-input" placeholder="Type a country name...">
-            <div id="suggestions"></div>
+        <h1>Bidirectional Array-Country Converter</h1>
+
+        <div class="mode-toggle">
+            <button id="mode-c2a-btn" class="toggle-btn active">Country to Array</button>
+            <button id="mode-a2c-btn" class="toggle-btn">Array to Country</button>
         </div>
 
-        <h2>Option 2: Paste a List</h2>
-        <div id="bulk-add-container">
-            <textarea id="country-list-input" placeholder="Paste a list of countries here, separated by commas or new lines..."></textarea>
-            <button id="process-list-btn">Process List</button>
-            <div id="unmapped-warning"></div>
+        <!-- Country to Array View -->
+        <div id="country-to-array-view">
+            <h2>Option 1: Select Manually</h2>
+            <div class="input-container">
+                <input type="text" id="country-input" placeholder="Type a country name...">
+                <div id="suggestions"></div>
+            </div>
+
+            <h2>Option 2: Paste a List</h2>
+            <div id="bulk-add-container">
+                <textarea id="country-list-input" placeholder="Paste a list of countries here, separated by commas or new lines..."></textarea>
+                <button id="process-list-btn">Process List</button>
+                <div id="unmapped-warning"></div>
+            </div>
+
+            <div id="selected-countries-header">
+                <h3>Selected Countries</h3>
+                <button id="view-toggle-btn">Toggle View</button>
+            </div>
+            <div id="selected-countries"></div>
+            
+            <div class="actions-container">
+                <button id="generate-array-btn" class="main-action-btn">Generate Array</button>
+            </div>
         </div>
 
-        <div id="selected-countries-header">
-            <h3>Selected Countries</h3>
-            <button id="view-toggle-btn">Toggle View</button>
+        <!-- Array to Country View -->
+        <div id="array-to-country-view" style="display: none;">
+            <h2>Paste an Array of IDs</h2>
+            <textarea id="array-input" placeholder="Paste an array of IDs here, e.g., [1, 4, 7] or 1, 4, 7"></textarea>
+            <div class="actions-container">
+                <button id="convert-to-countries-btn" class="main-action-btn">Convert to Countries</button>
+            </div>
         </div>
-        <div id="selected-countries"></div>
-        
-        <div class="actions-container">
+
+        <!-- Shared Controls and Result -->
+        <div class="shared-actions-container">
             <button id="clear-btn">Clear All</button>
-            <button id="proceed-btn">Generate Array</button>
         </div>
 
         <div id="result">
-            <p>Your positional array will appear here.</p>
+            <p>Your result will appear here.</p>
         </div>
     </div>
 
@@ -301,25 +370,55 @@
         ];
 
         // --- DOM Elements ---
+        const modeC2aBtn = document.getElementById('mode-c2a-btn');
+        const modeA2cBtn = document.getElementById('mode-a2c-btn');
+        const c2aView = document.getElementById('country-to-array-view');
+        const a2cView = document.getElementById('array-to-country-view');
+        
         const countryInput = document.getElementById('country-input');
         const suggestionsPanel = document.getElementById('suggestions');
         const countryListInput = document.getElementById('country-list-input');
         const processListBtn = document.getElementById('process-list-btn');
         const unmappedWarning = document.getElementById('unmapped-warning');
         const selectedCountriesPanel = document.getElementById('selected-countries');
-        const proceedBtn = document.getElementById('proceed-btn');
-        const resultPanel = document.getElementById('result');
+        const generateArrayBtn = document.getElementById('generate-array-btn');
         const viewToggleBtn = document.getElementById('view-toggle-btn');
+
+        const arrayInput = document.getElementById('array-input');
+        const convertToCountriesBtn = document.getElementById('convert-to-countries-btn');
+        
         const clearBtn = document.getElementById('clear-btn');
+        const resultPanel = document.getElementById('result');
 
         // --- State ---
+        let currentMode = 'c2a'; // 'c2a' for country-to-array, 'a2c' for array-to-country
         let selectedCountries = [];
         let filteredCountries = [];
         let highlightedIndex = -1;
-        let currentView = 'pills';
+        let c2a_currentView = 'pills';
+        // For faster lookups in a2c mode
+        const countryIdMap = new Map(countries.map(c => [c.id.toString(), c.name]));
 
         // --- Functions ---
         
+        // --- Mode Switching ---
+        function switchMode(mode) {
+            currentMode = mode;
+            if (mode === 'c2a') {
+                modeC2aBtn.classList.add('active');
+                modeA2cBtn.classList.remove('active');
+                c2aView.style.display = 'block';
+                a2cView.style.display = 'none';
+            } else {
+                modeC2aBtn.classList.remove('active');
+                modeA2cBtn.classList.add('active');
+                c2aView.style.display = 'none';
+                a2cView.style.display = 'block';
+            }
+            clearAll(); // Reset everything when switching modes
+        }
+
+        // --- Country to Array (c2a) Functions ---
         function handleInput() {
             const input = countryInput.value.toLowerCase();
             suggestionsPanel.innerHTML = '';
@@ -391,7 +490,7 @@
 
         function renderSelectedCountries() {
             selectedCountriesPanel.innerHTML = '';
-            if (currentView === 'pills') {
+            if (c2a_currentView === 'pills') {
                 selectedCountriesPanel.className = 'pills-view';
                 selectedCountries.forEach(country => {
                     const pill = document.createElement('div');
@@ -446,32 +545,89 @@
         }
 
         function generateArray() {
+            if (selectedCountries.length === 0) {
+                 resultPanel.innerHTML = `<p>Please select at least one country.</p>`;
+                 return;
+            }
+            // Create a copy to sort, leaving the original selection order intact for the display.
+            const sortedSelection = [...selectedCountries];
             // Sort by ID to ensure consistent order
-            selectedCountries.sort((a, b) => a.id - b.id);
+            sortedSelection.sort((a, b) => a.id - b.id);
             // Map to get just the IDs of the selected countries
-            const positionalArray = selectedCountries.map(country => country.id);
-            resultPanel.innerHTML = `<p><strong>Generated Positional Array:</strong></p>[${positionalArray.join(', ')}]`;
+            const positionalArray = sortedSelection.map(country => country.id);
+            resultPanel.innerHTML = `<p><strong>Generated Sorted Array:</strong></p>[${positionalArray.join(', ')}]`;
+        }
+
+        // --- Array to Country (a2c) Functions ---
+        function convertArrayToCountries() {
+            const text = arrayInput.value;
+            if (!text.trim()) {
+                resultPanel.innerHTML = '<p>Please paste an array of IDs.</p>';
+                return;
+            }
+
+            const ids = text.match(/\d+/g) || [];
+            const uniqueIds = [...new Set(ids)]; // Process unique IDs to avoid duplicate lookups
+            const notFoundIds = [];
+
+            uniqueIds.forEach(id => {
+                if (!countryIdMap.has(id)) {
+                    notFoundIds.push(id);
+                }
+            });
+
+            // To display in the original order, we map over the original `ids` array
+            const orderedFoundCountries = ids.map(id => countryIdMap.get(id)).filter(Boolean);
+
+            let html = '';
+            if (orderedFoundCountries.length > 0) {
+                html += `<p><strong>Converted Countries (${orderedFoundCountries.length}):</strong></p>`;
+                html += '<ol class="result-list">';
+                orderedFoundCountries.forEach(name => {
+                    html += `<li>${name}</li>`;
+                });
+                html += '</ol>';
+            } else {
+                html += '<p>No valid country IDs were found.</p>';
+            }
+
+            if (notFoundIds.length > 0) {
+                html += `<div class="result-warning"><strong>Unmapped IDs:</strong> ${notFoundIds.join(', ')}</div>`;
+            }
+
+            resultPanel.innerHTML = html;
         }
         
+        // --- Shared Functions ---
         function clearAll() {
-            selectedCountries = [];
-            renderSelectedCountries();
-            resultPanel.innerHTML = '<p>Your positional array will appear here.</p>';
-            countryInput.value = '';
-            countryListInput.value = '';
-            unmappedWarning.style.display = 'none';
-            countryInput.focus();
+            if (currentMode === 'c2a') {
+                selectedCountries = [];
+                renderSelectedCountries();
+                countryInput.value = '';
+                countryListInput.value = '';
+                unmappedWarning.style.display = 'none';
+                countryInput.focus();
+            } else { // 'a2c'
+                arrayInput.value = '';
+                arrayInput.focus();
+            }
+            resultPanel.innerHTML = '<p>Your result will appear here.</p>';
         }
 
         // --- Event Listeners ---
+        modeC2aBtn.addEventListener('click', () => switchMode('c2a'));
+        modeA2cBtn.addEventListener('click', () => switchMode('a2c'));
+
         countryInput.addEventListener('input', handleInput);
         countryInput.addEventListener('keydown', handleKeydown);
         processListBtn.addEventListener('click', processPastedList);
-        proceedBtn.addEventListener('click', generateArray);
+        generateArrayBtn.addEventListener('click', generateArray);
+        convertToCountriesBtn.addEventListener('click', convertArrayToCountries);
+        
         clearBtn.addEventListener('click', clearAll);
 
         viewToggleBtn.addEventListener('click', () => {
-            currentView = (currentView === 'pills') ? 'list' : 'pills';
+            c2a_currentView = (c2a_currentView === 'pills') ? 'list' : 'pills';
             renderSelectedCountries();
         });
 

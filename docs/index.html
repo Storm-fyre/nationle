@@ -29,7 +29,7 @@
             <div class="input-column">
                 <label for="country-guess-input">1. Guess a Country</label>
                 <div class="search-wrapper">
-                    <input type="text" id="country-guess-input" placeholder="Click to select a country...">
+                    <input type="text" id="country-guess-input" placeholder="Type to search countries...">
                     <div id="country-dropdown" class="dropdown-content"></div>
                 </div>
             </div>
@@ -50,6 +50,7 @@
 
         <div class="submit-container">
             <button id="submit-turn-btn">Submit Guess</button>
+            <button id="give-up-btn">Give Up</button>
             <button id="new-game-btn" class="hidden">New Game</button>
         </div>
 
@@ -67,6 +68,16 @@
             <span id="modal-close-btn">×</span>
             <h2>You Guessed It!</h2>
             <p>The secret country was <strong id="secret-country-name"></strong>!</p>
+        </div>
+    </div>
+
+    <!-- Give Up Message Modal -->
+    <div id="give-up-modal" class="hidden">
+        <div class="modal-content">
+            <span id="give-up-modal-close-btn">×</span>
+            <h2>Game Over</h2>
+            <p>The secret country was <strong id="give-up-country-name"></strong>!</p>
+            <p>Better luck next time!</p>
         </div>
     </div>
 

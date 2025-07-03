@@ -83,7 +83,7 @@ Uganda
 Zambia
 Zimbabwe
 
-Asia has 48 UN member states, covering the continent from the Middle East to East Asia and including parts of the Caucasus and Central Asia. Below is the complete list, organized alphabetically:
+Asia has 47 UN member states, covering the continent from the Middle East to East Asia and including parts of the Caucasus and Central Asia. Below is the complete list, organized alphabetically:
 
 Afghanistan
 Armenia
@@ -94,7 +94,6 @@ Bhutan
 Brunei
 Cambodia
 China
-Cyprus
 North Korea
 Georgia
 India
@@ -134,7 +133,7 @@ Uzbekistan
 Vietnam
 Yemen
 
-Europe has 44 UN member states, covering Western, Eastern, Northern, Southern Europe, and parts of the Caucasus. Below is the complete list, organized alphabetically:
+Europe has 45 UN member states, covering Western, Eastern, Northern, Southern Europe, and parts of the Caucasus. Below is the complete list, organized alphabetically:
 
 Albania
 Andorra
@@ -144,6 +143,7 @@ Belgium
 Bosnia and Herzegovina
 Bulgaria
 Croatia
+Cyprus
 Czech Republic
 Denmark
 Estonia
