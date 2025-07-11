@@ -149,11 +149,29 @@ document.addEventListener('DOMContentLoaded', () => {
             updateSubmitButtonState();
         }
 
+        // --- MODIFIED FUNCTION ---
         function submitTurn() {
             if (!selectedCountryGuess || !selectedQuestion) return;
 
             const isYes = selectedQuestion.countries.includes(secretCountry.id);
             logTurn(selectedCountryGuess, selectedQuestion, isYes);
+
+            // Use setTimeout to ensure the DOM has rendered the new log item before we try to scroll to it.
+            // A 50ms delay is imperceptible but robust.
+            setTimeout(() => {
+                const newLogItem = turnLog.firstChild;
+                if (newLogItem) {
+                    const rect = newLogItem.getBoundingClientRect();
+                    const isVisible = (
+                        rect.top >= 0 &&
+                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+                    );
+                    // If the new item is NOT visible, scroll it into view.
+                    if (!isVisible) {
+                        newLogItem.scrollIntoView({ behavior: "smooth", block: "end" });
+                    }
+                }
+            }, 50);
 
             // Add the country to used countries
             usedCountries.add(selectedCountryGuess.id);

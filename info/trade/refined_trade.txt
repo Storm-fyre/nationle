@@ -1,0 +1,292 @@
+{
+  "questions": [
+    {
+      "question": "Is 'Fresh Grapes' the largest export of your country?",
+      "countries": [40]
+    },
+    {
+      "question": "Is 'Footwear' the largest export of your country?",
+      "countries": [140]
+    },
+    {
+      "question": "Is 'Crude Oil' the largest export of your country?",
+      "countries": [1, 2, 9, 10, 12, 16, 17, 20, 22, 25, 31, 32, 41, 49, 53, 58, 63, 67, 70, 73, 76, 112, 114, 141, 152, 154, 164]
+    },
+    {
+      "question": "Is 'Integrated Circuits' the largest export of your country?",
+      "countries": [66, 72, 107, 176, 180, 186]
+    },
+    {
+      "question": "Is 'Passenger Ships' the largest export of your country?",
+      "countries": [155, 162, 182, 184, 189, 194]
+    },
+    {
+      "question": "Is 'Soybean Meal' the largest export of your country?",
+      "countries": [8]
+    },
+    {
+      "question": "Is 'Copper Ore' the largest export of your country?",
+      "countries": [19, 37, 116, 119, 138]
+    },
+    {
+      "question": "Is 'Iron Ore' the largest export of your country?",
+      "countries": [6, 28, 102]
+    },
+    {
+      "question": "Is 'Cars' the largest export of your country?",
+      "countries": [13, 36, 50, 51, 55, 57, 61, 62, 78, 81, 108, 109, 113, 115, 127, 136, 150]
+    },
+    {
+      "question": "Is 'Refined Petroleum' the largest export of your country?",
+      "countries": [4, 7, 29, 64, 84, 95, 103, 121, 123, 124, 131, 177]
+    },
+    {
+      "question": "Is 'Knit Sweaters' the largest export of your country?",
+      "countries": [88, 93]
+    },
+    {
+      "question": "Is 'Rum' the largest export of your country?",
+      "countries": [183]
+    },
+    {
+      "question": "Is 'Raw Sugar' the largest export of your country?",
+      "countries": [147]
+    },
+    {
+      "question": "Is 'Raw Cotton' the largest export of your country?",
+      "countries": [100]
+    },
+    {
+      "question": "Is 'Ferroalloys' the largest export of your country?",
+      "countries": [133]
+    },
+    {
+      "question": "Is 'Gold' the largest export of your country?",
+      "countries": [15, 21, 23, 24, 27, 30, 56, 60, 74, 77, 79, 80, 83, 85, 86, 90, 94, 128, 132, 142, 144, 161]
+    },
+    {
+      "question": "Is 'Electricity' the largest export of your country?",
+      "countries": [82, 125]
+    },
+    {
+      "question": "Is 'Diamonds' the largest export of your country?",
+      "countries": [34, 47, 137, 149]
+    },
+    {
+      "question": "Is 'Soybeans' the largest export of your country?",
+      "countries": [5, 59]
+    },
+    {
+      "question": "Is 'Fish' the largest export of your country?",
+      "countries": [157, 166, 167, 170, 172, 174, 175, 179, 181, 187, 192, 193]
+    },
+    {
+      "question": "Is 'Rough Wood' the largest export of your country?",
+      "countries": [44, 139, 159]
+    },
+    {
+      "question": "Is 'Broadcasting Equipment' the largest export of your country?",
+      "countries": [3, 65, 129, 188]
+    },
+    {
+      "question": "Is 'Cloves' the largest export of your country?",
+      "countries": [169]
+    },
+    {
+      "question": "Is 'Medical Instruments' the largest export of your country?",
+      "countries": [126, 173, 190]
+    },
+    {
+      "question": "Is 'Cocoa Beans' the largest export of your country?",
+      "countries": [68, 171]
+    },
+    {
+      "question": "Is 'Rolled Tobacco' the largest export of your country?",
+      "countries": [104]
+    },
+    {
+      "question": "Is 'Refined Copper' the largest export of your country?",
+      "countries": [11, 38]
+    },
+    {
+      "question": "Is 'Packaged Medicaments' the largest export of your country?",
+      "countries": [71, 118, 130, 191]
+    },
+    {
+      "question": "Is 'Sheep' the largest export of your country?",
+      "countries": [43, 146]
+    },
+    {
+      "question": "Is 'Knit T shirts' the largest export of your country?",
+      "countries": [96, 143, 148]
+    },
+    {
+      "question": "Is 'Zinc Ore' the largest export of your country?",
+      "countries": [98]
+    },
+    {
+      "question": "Is 'Essential Oils' the largest export of your country?",
+      "countries": [153]
+    },
+    {
+      "question": "Is 'Coffee' the largest export of your country?",
+      "countries": [26, 101]
+    },
+    {
+      "question": "Is 'Water' the largest export of your country?",
+      "countries": [151]
+    },
+    {
+      "question": "Is 'Aircraft' the largest export of your country?",
+      "countries": [42]
+    },
+    {
+      "question": "Is 'Nutmeg' the largest export of your country?",
+      "countries": [185]
+    },
+    {
+      "question": "Is 'Bananas' the largest export of your country?",
+      "countries": [105, 178]
+    },
+    {
+      "question": "Is 'Cashew Nuts' the largest export of your country?",
+      "countries": [134]
+    },
+    {
+      "question": "Is 'Aluminum' the largest export of your country?",
+      "countries": [106, 156]
+    },
+    {
+      "question": "Is 'Coal Briquettes' the largest export of your country?",
+      "countries": [14, 18, 35]
+    },
+    {
+      "question": "Is 'Alumina' the largest export of your country?",
+      "countries": [160]
+    },
+    {
+      "question": "Is 'Potassic Fertilizers' the largest export of your country?",
+      "countries": [110]
+    },
+    {
+      "question": "Is 'Tea' the largest export of your country?",
+      "countries": [48, 120]
+    },
+    {
+      "question": "Is 'Sawn Wood' the largest export of your country?",
+      "countries": [122]
+    },
+    {
+      "question": "Is 'Steel' the largest export of your country?",
+      "countries": [168]
+    },
+    {
+      "question": "Is 'Vanilla' the largest export of your country?",
+      "countries": [46]
+    },
+    {
+      "question": "Is 'Raw Tobacco' the largest export of your country?",
+      "countries": [99]
+    },
+    {
+      "question": "Is 'Insulated Wire' the largest export of your country?",
+      "countries": [91, 111, 135]
+    },
+    {
+      "question": "Is 'Petroleum Gas' the largest export of your country?",
+      "countries": [39, 52, 54, 158, 165]
+    },
+    {
+      "question": "Is 'Palm Oil' the largest export of your country?",
+      "countries": [92]
+    },
+    {
+      "question": "Is 'Milk' the largest export of your country?",
+      "countries": [75]
+    },
+    {
+      "question": "Is 'Reaction Engines' the largest export of your country?",
+      "countries": [145]
+    },
+    {
+      "question": "Is 'Linens' the largest export of your country?",
+      "countries": [33]
+    },
+    {
+      "question": "Is 'Olive Oil' the largest export of your country?",
+      "countries": [87, 163, 163]
+    },
+    {
+      "question": "Is 'Vehicle Parts' the largest export of your country?",
+      "countries": [69]
+    },
+    {
+      "question": "Is 'Titanium Ore' the largest export of your country?",
+      "countries": [117]
+    },
+    {
+      "question": "Is 'Corn' the largest export of your country?",
+      "countries": [45]
+    },
+    {
+      "question": "Is 'Beef' the largest export of your country?",
+      "countries": [89]
+    },
+    {
+      "question": "Is 'Printed Books' the largest export of your country?",
+      "countries": [195]
+    }
+  ]
+}
+{
+  "questions": [
+    {
+      "question": "Is 'Wheat' the largest import of your country?",
+      "countries": [10, 15, 28, 29, 40, 49, 87, 98]
+    },
+    {
+      "question": "Is 'Cars' the largest import of your country?",
+      "countries": [1, 2, 4, 6, 8, 9, 11, 12, 17, 20, 25, 27, 34, 37, 41, 42, 44, 47, 52, 56, 59, 67, 70, 75, 76, 82, 83, 89, 90, 106, 108, 110, 111, 112, 115, 119, 122, 123, 124, 125, 127, 128, 129, 130, 133, 135, 137, 140, 141, 145, 146, 149, 151, 152, 153, 154, 156, 157, 158, 163, 163, 164, 166, 167, 168, 170, 171, 172, 173, 174, 175, 177, 178, 179, 180, 181, 183, 184, 185, 187, 188, 189, 190, 191, 192, 193, 194]
+    },
+    {
+      "question": "Is 'Refined Petroleum' the largest import of your country?",
+      "countries": [5, 13, 16, 18, 19, 22, 23, 24, 26, 30, 31, 32, 33, 35, 38, 39, 45, 46, 48, 53, 54, 57, 58, 60, 63, 66, 68, 72, 73, 74, 79, 80, 85, 86, 91, 93, 94, 96, 99, 101, 102, 105, 113, 116, 117, 120, 126, 134, 136, 139, 142, 144, 147, 148, 150, 155, 159, 160, 161, 162, 165, 169, 176, 182, 186]
+    },
+    {
+      "question": "Is 'Natural Gas' the largest import of your country?",
+      "countries": [138]
+    },
+    {
+      "question": "Is 'Crude Oil' the largest import of your country?",
+      "countries": [7, 14, 50, 51, 55, 61, 62, 64, 69, 71, 81, 84, 95, 103, 107, 109, 121, 131]
+    },
+    {
+      "question": "Is 'Rice' the largest import of your country?",
+      "countries": [21, 77, 100, 143]
+    },
+    {
+      "question": "Is 'Gold' the largest import of your country?",
+      "countries": [36, 78, 88, 92, 114, 132]
+    },
+    {
+      "question": "Is 'Integrated Circuits' the largest import of your country?",
+      "countries": [3, 65]
+    },
+    {
+      "question": "Is 'Poultry Meat' the largest import of your country?",
+      "countries": [104]
+    },
+    {
+      "question": "Is 'Aircraft' the largest import of your country?",
+      "countries": [118]
+    },
+    {
+      "question": "Is 'Sugar' the largest import of your country?",
+      "countries": [43]
+    },
+    {
+      "question": "Is 'Pharmaceuticals' the largest import of your country?",
+      "countries": [195]
+    }
+  ]
+}

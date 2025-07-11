@@ -1,0 +1,178 @@
+Atlantic ocean:
+
+Albania
+Algeria
+Angola
+Antigua and Barbuda
+Argentina
+Bahamas, The
+Barbados
+Belgium
+Belize
+Benin
+Bosnia and Herzegovina
+Brazil
+Bulgaria
+Cameroon
+Canada
+Cape Verde
+Colombia
+Congo, Democratic Republic of the
+Congo, Republic of the
+Costa Rica
+Côte d'Ivoire (Ivory Coast)
+Croatia
+Cuba
+Cyprus
+Denmark
+Dominica
+Dominican Republic
+Egypt
+Equatorial Guinea
+Estonia
+Finland
+France
+Gabon
+Gambia
+Georgia
+Germany
+Ghana
+Greece
+Grenada
+Guatemala
+Guinea
+Guinea-Bissau
+Guyana
+Haiti
+Honduras
+Iceland
+Ireland
+Israel
+Italy
+Jamaica
+Latvia
+Lebanon
+Liberia
+Libya
+Lithuania
+Malta
+Mauritania
+Mexico
+Monaco
+Montenegro
+Morocco
+Namibia
+Netherlands
+Nicaragua
+Nigeria
+Norway
+Palestine
+Panama
+Poland
+Portugal
+Romania
+Russia
+Saint Kitts and Nevis
+Saint Lucia
+Saint Vincent and the Grenadines
+São Tomé and Príncipe
+Senegal
+Sierra Leone
+Slovenia
+South Africa
+Spain
+Suriname
+Sweden
+Syria
+Togo
+Trinidad and Tobago
+Tunisia
+Türkiye
+Ukraine
+United Kingdom
+United States
+Uruguay
+Venezuela
+
+Indian ocean:
+
+Australia
+Bahrain
+Bangladesh
+Comoros
+Djibouti
+Egypt
+Eritrea
+India
+Indonesia
+Iran
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Madagascar
+Malaysia
+Maldives
+Mauritius
+Mozambique
+Myanmar
+Oman
+Pakistan
+Qatar
+Saudi Arabia
+Seychelles
+Singapore
+Somalia
+South Africa
+Sri Lanka
+Sudan
+Tanzania
+Thailand
+Timor-Leste
+United Arab Emirates
+Yemen
+
+Pacific Ocian:
+
+Australia
+Brunei
+Cambodia
+Canada
+Chile
+China
+Colombia
+Costa Rica
+Ecuador
+El Salvador
+Fiji
+Guatemala
+Honduras
+Indonesia
+Japan
+Kiribati
+Malaysia
+Marshall Islands
+Mexico
+Micronesia (Federated States of)
+Nauru
+New Zealand
+Nicaragua
+North Korea
+Palau
+Panama
+Papua New Guinea
+Peru
+Philippines
+Russia
+Samoa
+Singapore
+Solomon Islands
+South Korea
+Thailand
+Timor-Leste
+Tonga
+Tuvalu
+United States
+Vanuatu
+Vietnam

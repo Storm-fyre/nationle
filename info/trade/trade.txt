@@ -1,0 +1,777 @@
+Afghanistan: Fresh Grapes - Wheat
+
+
+
+Albania: Footwear - Cars
+
+
+
+Algeria: Crude Oil - Wheat
+
+
+
+Andorra: Integrated Circuits - Cars
+
+
+
+Angola: Crude Oil - Refined Petroleum
+
+
+
+Antigua and Barbuda: Passenger Ships - Refined Petroleum
+
+
+
+Argentina: Soybean Meal - Cars
+
+
+
+Armenia: Copper Ore - Natural Gas
+
+
+
+Australia: Iron Ore - Cars
+
+
+
+Austria: Cars - Refined Petroleum
+
+
+
+Azerbaijan: Crude Oil - Cars
+
+
+
+Bahamas: Passenger Ships - Refined Petroleum
+
+
+
+Bahrain: Refined Petroleum - Cars
+
+
+
+Bangladesh: Knit Sweaters - Refined Petroleum
+
+
+
+Barbados: Rum - Cars
+
+
+
+Belarus: Refined Petroleum - Crude Oil
+
+
+
+Belgium: Cars - Refined Petroleum
+
+
+
+Belize: Raw Sugar - Refined Petroleum
+
+
+
+Benin: Raw Cotton - Rice
+
+
+
+Bhutan: Ferroalloys - Cars
+
+
+
+Bolivia: Gold - Cars
+
+
+
+Bosnia and Herzegovina: Electricity - Cars
+
+
+
+Botswana: Diamonds - Cars
+
+
+
+Brazil: Soybeans - Refined Petroleum
+
+
+
+Brunei: Crude Oil - Cars
+
+
+
+Bulgaria: Refined Petroleum - Crude Oil
+
+
+
+Burkina Faso: Gold - Refined Petroleum
+
+
+
+Burundi: Gold - Refined Petroleum
+
+
+
+Cabo Verde: Fish - Cars
+
+
+
+Cambodia: Knit Sweaters - Gold
+
+
+
+Cameroon: Crude Oil - Refined Petroleum
+
+
+
+Canada: Crude Oil - Cars
+
+
+
+Central African Republic: Rough Wood - Cars
+
+
+
+Chad: Crude Oil - Cars
+
+
+
+Chile: Copper Ore - Cars
+
+
+
+China: Broadcasting Equipment - Integrated Circuits
+
+
+
+Colombia: Crude Oil - Cars
+
+
+
+Comoros: Cloves - Refined Petroleum
+
+
+
+Republic of the Congo: Crude Oil - Refined Petroleum
+
+
+
+Costa Rica: Medical Instruments - Refined Petroleum
+
+
+
+Ivory coast: Cocoa Beans - Refined Petroleum
+
+
+
+Croatia: Refined Petroleum - Cars
+
+
+
+Cuba: Rolled Tobacco - Poultry Meat
+
+
+
+Cyprus: Passenger Ships - Refined Petroleum
+
+
+
+Czech Republic: Cars - Cars
+
+
+
+Democratic Republic of the Congo: Refined Copper - Cars
+
+
+
+Denmark: Packaged Medicaments - Cars
+
+
+
+Djibouti: Sheep - Cars
+
+
+
+Dominica: Medical Instruments - Cars
+
+
+
+Dominican Republic: Gold - Cars
+
+
+
+Ecuador: Crude Oil - Refined Petroleum
+
+
+
+Egypt: Refined Petroleum - Wheat
+
+
+
+El Salvador: Knit T shirts - Refined Petroleum
+
+
+
+Equatorial Guinea: Crude Oil - Cars
+
+
+
+Eritrea: Zinc Ore - Wheat
+
+
+
+Estonia: Broadcasting Equipment - Cars
+
+
+
+Eswatini: Essential Oils - Cars
+
+
+
+Ethiopia: Coffee - Refined Petroleum
+
+
+
+Fiji: Water - Cars
+
+
+
+Finland: Refined Petroleum - Crude Oil
+
+
+
+France: Aircraft - Cars
+
+
+
+Gabon: Crude Oil - Cars
+
+
+
+Gambia: Rough Wood - Refined Petroleum
+
+
+
+Georgia: Copper Ore - Cars
+
+
+
+Germany: Cars - Crude Oil
+
+
+
+Ghana: Gold - Refined Petroleum
+
+
+
+Greece: Refined Petroleum - Crude Oil
+
+
+
+Grenada: Nutmeg - Cars
+
+
+
+Guatemala: Bananas - Refined Petroleum
+
+
+
+Guinea: Gold - Rice
+
+
+
+Guinea-Bissau: Cashew Nuts - Refined Petroleum
+
+
+
+Guyana: Gold - Cars
+
+
+
+Haiti: Knit T shirts - Rice
+
+
+
+Honduras: Coffee - Refined Petroleum
+
+
+
+Hungary: Cars - Cars
+
+
+
+Iceland: Aluminum - Cars
+
+
+
+India: Refined Petroleum - Crude Oil
+
+
+
+Indonesia: Coal Briquettes - Crude Oil
+
+
+
+Iran: Crude Oil - Cars
+
+
+
+Iraq: Crude Oil - Refined Petroleum
+
+
+
+Ireland: Packaged Medicaments - Aircraft
+
+
+
+Israel: Diamonds - Cars
+
+
+
+Italy: Packaged Medicaments - Crude Oil
+
+
+
+Jamaica: Alumina - Refined Petroleum
+
+
+
+Japan: Cars - Crude Oil
+
+
+
+Jordan: Potassic Fertilizers - Cars
+
+
+
+Kazakhstan: Crude Oil - Cars
+
+
+
+Kenya: Tea - Refined Petroleum
+
+
+
+Kiribati: Fish - Cars
+
+
+
+Kuwait: Crude Oil - Cars
+
+
+
+Kyrgyzstan: Gold - Refined Petroleum
+
+
+
+Laos: Electricity - Cars
+
+
+
+Latvia: Sawn Wood - Cars
+
+
+
+Lebanon: Gold - Refined Petroleum
+
+
+
+Lesotho: Diamonds - Cars
+
+
+
+Liberia: Iron Ore - Refined Petroleum
+
+
+
+Libya: Crude Oil - Refined Petroleum
+
+
+
+Liechtenstein: Medical Instruments - Cars
+
+
+
+Lithuania: Refined Petroleum - Crude Oil
+
+
+
+Luxembourg: Steel - Cars
+
+
+
+Madagascar: Vanilla - Refined Petroleum
+
+
+
+Malawi: Raw Tobacco - Refined Petroleum
+
+
+
+Malaysia: Integrated Circuits - Refined Petroleum
+
+
+
+Maldives: Fish - Cars
+
+
+
+Mali: Gold - Refined Petroleum
+
+
+
+Malta: Integrated Circuits - Refined Petroleum
+
+
+
+Marshall Islands: Passenger Ships - Cars
+
+
+
+Mauritania: Iron Ore - Wheat
+
+
+
+Mauritius: Fish - Cars
+
+
+
+Mexico: Cars - Refined Petroleum
+
+
+
+Micronesia: Fish - Cars
+
+
+
+Moldova: Insulated Wire - Cars
+
+
+
+Monaco: Passenger Ships - Cars
+
+
+
+Mongolia: Coal Briquettes - Refined Petroleum
+
+
+
+Montenegro: Aluminum - Cars
+
+
+
+Morocco: Cars - Refined Petroleum
+
+
+
+Mozambique: Coal Briquettes - Refined Petroleum
+
+
+
+Myanmar: Petroleum Gas - Refined Petroleum
+
+
+
+Namibia: Diamonds - Cars
+
+
+
+Nauru: Fish - Cars
+
+
+
+Nepal: Palm Oil - Gold
+
+
+
+Netherlands: Refined Petroleum - Crude Oil
+
+
+
+New Zealand: Milk - Cars
+
+
+
+Nicaragua: Knit T shirts - Refined Petroleum
+
+
+
+Niger: Gold - Rice
+
+
+
+Nigeria: Crude Oil - Refined Petroleum
+
+
+
+North Macedonia: Reaction Engines - Cars
+
+
+
+Norway: Crude Oil - Cars
+
+
+
+Oman: Crude Oil - Cars
+
+
+
+Pakistan: Linens - Refined Petroleum
+
+
+
+Palau: Fish - Cars
+
+
+
+Palestine: Olive Oil - Cars
+
+
+
+Panama: Copper Ore - Refined Petroleum
+
+
+
+Papua New Guinea: Petroleum Gas - Refined Petroleum
+
+
+
+Paraguay: Soybeans - Cars
+
+
+
+Peru: Copper Ore - Refined Petroleum
+
+
+
+Philippines: Integrated Circuits - Refined Petroleum
+
+
+
+Poland: Vehicle Parts - Crude Oil
+
+
+
+Portugal: Cars - Crude Oil
+
+
+
+Qatar: Petroleum Gas - Cars
+
+
+
+Romania: Cars - Crude Oil
+
+
+
+Russia: Crude Oil - Cars
+
+
+
+Rwanda: Gold - Refined Petroleum
+
+
+
+Saint Kitts and Nevis: Broadcasting Equipment - Cars
+
+
+
+Saint Lucia: Bananas - Cars
+
+
+
+Saint Vincent and the Grenadines: Passenger Ships - Cars
+
+
+
+Samoa: Fish - Cars
+
+
+
+San Marino: Packaged Medicaments - Cars
+
+
+
+Sao Tome and Principe: Cocoa Beans - Cars
+
+
+
+Saudi Arabia: Crude Oil - Cars
+
+
+
+Senegal: Gold - Refined Petroleum
+
+
+
+Serbia: Insulated Wire - Cars
+
+
+
+Seychelles: Fish - Cars
+
+
+
+Sierra Leone: Titanium Ore - Refined Petroleum
+
+
+
+Singapore: Integrated Circuits - Refined Petroleum
+
+
+
+Slovakia: Cars - Cars
+
+
+
+Slovenia: Cars - Refined Petroleum
+
+
+
+Solomon Islands: Rough Wood - Refined Petroleum
+
+
+
+Somalia: Sheep - Sugar
+
+
+
+South Africa: Gold - Refined Petroleum
+
+
+
+South Korea: Integrated Circuits - Crude Oil
+
+
+
+South Sudan: Crude Oil - Cars
+
+
+
+Spain: Cars - Crude Oil
+
+
+
+Sri Lanka: Tea - Refined Petroleum
+
+
+
+Sudan: Gold - Wheat
+
+
+
+Suriname: Gold - Cars
+
+
+
+Sweden: Cars - Crude Oil
+
+
+
+Switzerland: Gold - Gold
+
+
+
+Syria: Olive Oil - Wheat
+
+
+
+Tajikistan: Gold - Refined Petroleum
+
+
+
+Tanzania: Gold - Refined Petroleum
+
+
+
+Thailand: Cars - Crude Oil
+
+
+
+Timor-Leste: Crude Oil - Cars
+
+
+
+Togo: Refined Petroleum - Cars
+
+
+
+Tonga: Fish - Cars
+
+
+
+Trinidad and Tobago: Petroleum Gas - Refined Petroleum
+
+
+
+Tunisia: Insulated Wire - Refined Petroleum
+
+
+
+Turkey: Cars - Gold
+
+
+
+Turkmenistan: Petroleum Gas - Cars
+
+
+
+Tuvalu: Fish - Cars
+
+
+
+Uganda: Gold - Refined Petroleum
+
+
+
+Ukraine: Corn - Refined Petroleum
+
+
+
+United Arab Emirates: Crude Oil - Gold
+
+
+
+United Kingdom: Cars - Gold
+
+
+
+United States: Refined Petroleum - Cars
+
+
+
+Uruguay: Beef - Cars
+
+
+
+Uzbekistan: Gold - Cars
+
+
+
+Vanuatu: Fish - Cars
+
+
+
+Venezuela: Crude Oil - Refined Petroleum
+
+
+
+Vietnam: Broadcasting Equipment - Integrated Circuits
+
+
+
+Yemen: Crude Oil - Wheat
+
+
+
+Zambia: Refined Copper - Refined Petroleum
+
+
+
+Zimbabwe: Gold - Refined Petroleum
+
+
+
+Vatican City: Printed Books - Pharmaceuticals
+
+
+
+Palestine: Olive Oil - Cars
