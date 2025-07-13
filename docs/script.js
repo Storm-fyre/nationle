@@ -315,20 +315,107 @@ document.addEventListener('DOMContentLoaded', () => {
         function renderFilterButtons() {
             filterContainer.innerHTML = '';
             filterContainer.style.pointerEvents = 'auto';
+            
+            // Create All Categories button
             const allButton = document.createElement('button');
             allButton.className = 'filter-btn active';
             allButton.textContent = 'All Categories';
             allButton.addEventListener('click', () => setFilter(null));
-            filterContainer.appendChild(allButton);
-            questionsData.categories.forEach(category => {
-                const button = document.createElement('button');
-                button.className = 'filter-btn';
-                button.textContent = category.name;
-                button.addEventListener('click', () => setFilter(category.name));
-                filterContainer.appendChild(button);
+            
+            // Check if mobile
+            const isMobile = window.innerWidth < 768;
+            
+            if (isMobile) {
+                // Mobile: organize by rows
+                const categoriesWithRows = questionsData.categories.map(category => ({
+                    ...category,
+                    mobileRow: category.mobileRow || 1 // Default to row 1 if not specified
+                }));
+                
+                // Group categories by row
+                const rowGroups = {};
+                categoriesWithRows.forEach(category => {
+                    if (!rowGroups[category.mobileRow]) {
+                        rowGroups[category.mobileRow] = [];
+                    }
+                    rowGroups[category.mobileRow].push(category);
+                });
+                
+                // Create row containers
+                const sortedRows = Object.keys(rowGroups).sort((a, b) => Number(a) - Number(b));
+                
+                sortedRows.forEach(rowNum => {
+                    const rowContainer = document.createElement('div');
+                    rowContainer.className = 'filter-row';
+                    
+                    // Add All Categories button to first row
+                    if (rowNum === sortedRows[0]) {
+                        rowContainer.appendChild(allButton);
+                    }
+                    
+                    // Add category buttons for this row
+                    rowGroups[rowNum].forEach(category => {
+                        const button = document.createElement('button');
+                        button.className = 'filter-btn';
+                        button.textContent = category.name;
+                        button.addEventListener('click', () => setFilter(category.name));
+                        rowContainer.appendChild(button);
+                    });
+                    
+                    filterContainer.appendChild(rowContainer);
+                });
+                
+                // Check for overflow and adjust button sizes
+                adjustButtonSizesIfOverflow();
+                
+            } else {
+                // Desktop: original behavior with flex-wrap
+                filterContainer.appendChild(allButton);
+                
+                questionsData.categories.forEach(category => {
+                    const button = document.createElement('button');
+                    button.className = 'filter-btn';
+                    button.textContent = category.name;
+                    button.addEventListener('click', () => setFilter(category.name));
+                    filterContainer.appendChild(button);
+                });
+            }
+        }
+        function adjustButtonSizesIfOverflow() {
+            const rows = filterContainer.querySelectorAll('.filter-row');
+            
+            rows.forEach(row => {
+                const buttons = row.querySelectorAll('.filter-btn');
+                if (buttons.length === 0) return;
+                
+                // Reset button styles to get natural width
+                buttons.forEach(btn => {
+                    btn.style.fontSize = '';
+                    btn.style.padding = '';
+                    btn.style.minWidth = '';
+                });
+                
+                // Check if row overflows
+                const containerWidth = filterContainer.offsetWidth;
+                const buttonsWidth = Array.from(buttons).reduce((total, btn) => {
+                    return total + btn.offsetWidth + parseFloat(getComputedStyle(btn).marginLeft) + parseFloat(getComputedStyle(btn).marginRight);
+                }, 0);
+                
+                // If overflow, reduce button sizes
+                if (buttonsWidth > containerWidth) {
+                    const scaleFactor = containerWidth / buttonsWidth * 0.95; // 95% to ensure no overflow
+                    
+                    buttons.forEach(btn => {
+                        const currentFontSize = parseFloat(getComputedStyle(btn).fontSize);
+                        const currentPadding = parseFloat(getComputedStyle(btn).paddingLeft);
+                        
+                        btn.style.fontSize = `${currentFontSize * scaleFactor}px`;
+                        btn.style.padding = `${currentPadding * scaleFactor}px`;
+                        btn.style.minWidth = 'auto';
+                    });
+                }
             });
         }
-
         function setFilter(categoryName) {
             activeFilter = categoryName;
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -479,6 +566,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+        window.addEventListener('resize', () => {
+    if (window.innerWidth < 768) {
+        setTimeout(adjustButtonSizesIfOverflow, 100);
+    }
+    });
 
         // --- INITIALIZE THE GAME ---
         initializeGame();

@@ -1,7 +1,8 @@
 {
   "categories": [
     {
-      "name": "Multinational Groupings",
+      "name": "Groupings",
+      "mobileRow": 1,
       "questions": [
         {
           "question": "Is your country a member of the G7?",
@@ -62,7 +63,8 @@
       ]
     },
     {
-      "name": "Coastal & Island Geography",
+      "name": "Coasts & Islands",
+      "mobileRow": 1,
       "questions": [
         {
           "question": "Is your country land-locked?",
@@ -135,7 +137,8 @@
       ]
     },
     {
-      "name": "General Geography",
+      "name": "Regions & Size",
+      "mobileRow": 2,
       "questions": [
         {
           "question": "Is your country considered a Middle Eastern country?",
@@ -184,7 +187,8 @@
       ]
     },
     {
-      "name": "Political",
+      "name": "Politics",
+      "mobileRow": 2,
       "questions": [
         {
           "question": "Is your country an absolute monarchy?",
@@ -214,7 +218,8 @@
       ]
     },
     {
-      "name": "Currencies",
+      "name": "Currency",
+      "mobileRow": 2,
       "questions": [
         {
           "question": "Does your country use United States Dollar as its official/defacto currency?",
@@ -244,6 +249,7 @@
     },
     {
       "name": "Colonialism",
+      "mobileRow": 3,
       "questions": [
         {
           "question": "Was Britian your nation's dominant colonial power (colony/ protectorate/ mandate)?",
@@ -280,7 +286,8 @@
       ]
     },
     {
-      "name": "Historical",
+      "name": "Historical Allainces",
+      "mobileRow": 3,
       "questions": [
         {
           "question": "Is your country a former Soviet republic?",
@@ -301,7 +308,8 @@
       ]
     },
     {
-      "name": "Military & Defence",
+      "name": "Military",
+      "mobileRow": 3,
       "questions": [
         {
           "question": "Does your country lack a de facto conventional military for national defense?",
@@ -315,6 +323,7 @@
     },
     {
       "name": "Language Family",
+      "mobileRow": 4,
       "questions": [
         {
           "question": "Is the most spoken(native or otherwise) language in your country belongs to the Indo-European language family?",
@@ -348,6 +357,7 @@
     },
     {
       "name": "Language",
+      "mobileRow": 4,
       "questions": [
         {
           "question": "Is Spanish the most widely spoken language in your country?",
@@ -377,6 +387,7 @@
     },
     {
     "name": "Imports",
+    "mobileRow": 5,
     "questions": [
         {
           "question": "Is 'Wheat' the largest import of your country?",
@@ -430,6 +441,7 @@
     },
     {
       "name": "Exports",
+      "mobileRow": 5,
       "questions": [
         {
           "question": "Is 'Fresh Grapes' the largest export of your country?",
@@ -671,6 +683,7 @@
     },
     {
       "name": "Religion",
+      "mobileRow": 5,
       "questions": [
         {
           "question": "Is Christianity the most widely practiced religion in your country?",
