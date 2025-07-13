@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let activeFilter = null;
         let usedCountries = new Set(); // Track countries that have been used
         let gameEnded = false; // Track if the game has ended (won or given up)
+        let countryInputLocked = false; // Track if country input is locked
         
         // --- CORE GAME LOGIC ---
         function initializeGame() {
@@ -113,14 +114,18 @@ document.addEventListener('DOMContentLoaded', () => {
             activeFilter = null;
             usedCountries.clear(); // Clear used countries for new game
             gameEnded = false; // Reset game ended state
+            countryInputLocked = false; // Reset country input lock state
             turnLog.innerHTML = '';
 
             // Hide all modals
             winModal.classList.add('hidden');
             giveUpModal.classList.add('hidden');
             
-            // Enable inputs
-            [countryGuessInput, questionInput].forEach(el => el.disabled = false);
+            // Enable all inputs and clear them completely
+            countryGuessInput.disabled = false;
+            questionInput.disabled = false;
+            countryGuessInput.value = ''; // Clear country input completely
+            questionInput.value = ''; // Clear question input
             
             // Remove correct answer styling from input field
             countryGuessInput.classList.remove('correct-answer-input');
@@ -138,8 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
         function resetTurnState() {
             selectedCountryGuess = null;
             selectedQuestion = null;
-            // Only clear input if game hasn't ended
-            if (!gameEnded) {
+            // Only clear country input if it's not locked and game hasn't ended
+            if (!countryInputLocked && !gameEnded) {
                 countryGuessInput.value = '';
             }
             questionInput.value = '';
@@ -179,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check for a win AFTER logging the turn
             if (selectedCountryGuess.id === secretCountry.id) {
                 gameEnded = true;
+                countryInputLocked = true; // Lock country input
                 // Add styling to show correct answer in input field
                 countryGuessInput.classList.add('correct-answer-input');
                 showWinScreen();
@@ -189,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function giveUp() {
             gameEnded = true;
+            countryInputLocked = true; // Lock country input
             // Set the correct country in the input field
             countryGuessInput.value = secretCountry.name;
             selectedCountryGuess = secretCountry;
@@ -200,25 +207,31 @@ document.addEventListener('DOMContentLoaded', () => {
         function showWinScreen() {
             secretCountryNameSpan.textContent = secretCountry.name;
             winModal.classList.remove('hidden');
-            [countryGuessInput, questionInput].forEach(el => el.disabled = true);
+            
+            // Only disable country input, keep question input enabled
+            countryGuessInput.disabled = true;
             
             submitTurnBtn.classList.add('hidden');
             giveUpBtn.classList.add('hidden');
             newGameBtn.classList.remove('hidden');
             
-            filterContainer.style.pointerEvents = 'none';
+            // Keep filters enabled - remove the pointer-events disable
+            // filterContainer.style.pointerEvents = 'auto';
         }
 
         function showGiveUpScreen() {
             giveUpCountryNameSpan.textContent = secretCountry.name;
             giveUpModal.classList.remove('hidden');
-            [countryGuessInput, questionInput].forEach(el => el.disabled = true);
+            
+            // Only disable country input, keep question input enabled
+            countryGuessInput.disabled = true;
             
             submitTurnBtn.classList.add('hidden');
             giveUpBtn.classList.add('hidden');
             newGameBtn.classList.remove('hidden');
             
-            filterContainer.style.pointerEvents = 'none';
+            // Keep filters enabled - remove the pointer-events disable
+            // filterContainer.style.pointerEvents = 'auto';
         }
 
         // --- UI RENDERING & UPDATES ---
@@ -227,8 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
             questionDropdown.style.display = 'none'; // Hide other dropdown
             const query = countryGuessInput.value.toLowerCase().trim();
             
-            // Only show dropdown if user has typed something and game hasn't ended
-            if (query === '' || gameEnded) {
+            // Only show dropdown if user has typed something, country input is not locked, and game hasn't ended
+            if (query === '' || countryInputLocked || gameEnded) {
                 countryDropdown.style.display = 'none';
                 return;
             }
@@ -461,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- EVENT LISTENERS (specific to the game instance) ---
         countryGuessInput.addEventListener('input', () => {
-            if (!gameEnded) {
+            if (!countryInputLocked && !gameEnded) {
                 renderCountryGuesses();
                 // Clear selection when user types
                 selectedCountryGuess = null;
@@ -470,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         countryGuessInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !gameEnded) {
+            if (e.key === 'Enter' && !countryInputLocked && !gameEnded) {
                 e.preventDefault();
                 const query = countryGuessInput.value.trim();
                 
@@ -492,7 +505,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         countryGuessInput.addEventListener('blur', () => {
-            if (!gameEnded) {
+            if (!countryInputLocked && !gameEnded) {
                 // Small delay to allow click events on dropdown to fire first
                 setTimeout(() => {
                     const query = countryGuessInput.value.trim();
@@ -504,14 +517,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         questionInput.addEventListener('input', () => {
-            if (!gameEnded) {
-                renderQuestions();
-            }
+            // Question input is always available after winning
+            renderQuestions();
         });
 
         // Open dropdowns on direct click of the input element only
         countryGuessInput.addEventListener('click', (e) => {
-            if (!gameEnded) {
+            if (!countryInputLocked && !gameEnded) {
                 e.stopPropagation(); // Prevent event bubbling
                 if (e.target === countryGuessInput) {
                     if (countryGuessInput.value.trim()) {
@@ -522,11 +534,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         questionInput.addEventListener('click', (e) => {
-            if (!gameEnded) {
-                e.stopPropagation(); // Prevent event bubbling
-                if (e.target === questionInput && questionInput.readOnly) {
-                    renderQuestions({ forceShowAll: true });
-                }
+            // Question input is always available after winning
+            e.stopPropagation(); // Prevent event bubbling
+            if (e.target === questionInput && questionInput.readOnly) {
+                renderQuestions({ forceShowAll: true });
             }
         });
 
@@ -535,12 +546,11 @@ document.addEventListener('DOMContentLoaded', () => {
         newGameBtn.addEventListener('click', initializeGame);
         
         typeQuestionBtn.addEventListener('click', (e) => {
-            if (!gameEnded) {
-                e.stopPropagation(); 
-                questionInput.readOnly = false;
-                questionInput.focus();
-                renderQuestions(); 
-            }
+            // Question input is always available after winning
+            e.stopPropagation(); 
+            questionInput.readOnly = false;
+            questionInput.focus();
+            renderQuestions(); 
         });
         
         modalCloseBtn.addEventListener('click', () => {
